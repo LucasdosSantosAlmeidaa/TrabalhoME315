@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="visualizacao-dados2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="visualizacao-dados2_files/libs/quarto-html/tabby.min.js"></script>
+<script src="visualizacao-dados2_files/libs/quarto-html/popper.min.js"></script>
+<script src="visualizacao-dados2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="visualizacao-dados2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="visualizacao-dados2_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="visualizacao-dados2_files/libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.42">
+
+  <meta name="author" content="Workshop de Visualização">
+  <title>Visualização de Dados: Do Caos à Clareza</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="visualizacao-dados2_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="visualizacao-dados2_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="visualizacao-dados2_files/libs/revealjs/dist/theme/quarto-949fcd71989a651394be00d684876026.css">
+  <link href="visualizacao-dados2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="visualizacao-dados2_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="visualizacao-dados2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="visualizacao-dados2_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="visualizacao-dados2_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="visualizacao-dados2_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Visualização de Dados: Do Caos à Clareza</h1>
+  <p class="subtitle">Tutorial Completo com Datasets Financeiros Reais do Kaggle</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Workshop de Visualização 
+</div>
+</div>
+</div>
+
+</section>
+<section id="objetivo-da-apresentação" class="slide level2">
+<h2>🎯 Objetivo da Apresentação</h2>
+<div>
+<ul>
+<li class="fragment">Mostrar <strong>como NÃO fazer</strong> visualizações</li>
+<li class="fragment">Corrigir passo a passo aplicando <strong>boas práticas</strong></li>
+<li class="fragment">Comparar implementação em <strong>Python e R</strong> (rodando dentro de Julia!)</li>
+<li class="fragment">Entender <strong>quando usar cada tipo de gráfico</strong></li>
+<li class="fragment">Análise completa de portfolio financeiro</li>
+</ul>
+</div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Dataset Kaggle utilizado:</strong></p>
+<ul>
+<li><a href="https://www.kaggle.com/datasets/borismarjanovic/price-volume-data-for-all-us-stocks-etfs">Price-Volume Data for All US Stocks &amp; ETFs</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-inicial" class="slide level2">
+<h2>📦 Setup Inicial</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href=""></a>#| echo: true</span>
+<span id="cb1-2"><a href=""></a>#| output: false</span>
+<span id="cb1-3"><a href=""></a>#| warning: false</span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a>using Pkg</span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a># Instalar pacotes necessários (descomentar na primeira vez)</span>
+<span id="cb1-8"><a href=""></a>Pkg.add(["CSV", "DataFrames", "Plots", "StatsPlots", "Statistics", "Distributions", "GLM", "Dates", "StatsBase", "PyCall", "RCall"])</span>
+<span id="cb1-9"><a href=""></a></span>
+<span id="cb1-10"><a href=""></a>using CSV, DataFrames, Plots, StatsPlots, Statistics</span>
+<span id="cb1-11"><a href=""></a>using Distributions, GLM, Dates, StatsBase</span>
+<span id="cb1-12"><a href=""></a>using PyCall, RCall</span>
+<span id="cb1-13"><a href=""></a></span>
+<span id="cb1-14"><a href=""></a># Configurar Python e R</span>
+<span id="cb1-15"><a href=""></a>ENV["PYTHON"] = "" # usar conda python</span>
+<span id="cb1-16"><a href=""></a>Pkg.build("PyCall")</span>
+<span id="cb1-17"><a href=""></a></span>
+<span id="cb1-18"><a href=""></a>println("✅ Pacotes carregados com sucesso!")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="tipos-de-variáveis-tipos-de-gráficos" class="slide level2">
+<h2>📊 Tipos de Variáveis → Tipos de Gráficos</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 41%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variáveis</th>
+<th>Gráfico Recomendado</th>
+<th>Quando Usar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 Quantitativa</td>
+<td>Histograma, Densidade, Boxplot</td>
+<td>Distribuição</td>
+</tr>
+<tr class="even">
+<td>1 Categórica</td>
+<td>Barras</td>
+<td>Frequências</td>
+</tr>
+<tr class="odd">
+<td>2 Quantitativas</td>
+<td>Scatter, Hexbin</td>
+<td>Relação/Correlação</td>
+</tr>
+<tr class="even">
+<td>1 Quant + 1 Cat</td>
+<td>Boxplot/Violin por grupo</td>
+<td>Comparar grupos</td>
+</tr>
+<tr class="odd">
+<td>Temporal</td>
+<td>Linha, Área</td>
+<td>Evolução no tempo</td>
+</tr>
+<tr class="even">
+<td>Correlação múltipla</td>
+<td>Heatmap</td>
+<td>Matriz de correlação</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="parte-1-o-gráfico-do-inferno-julia" class="slide level2">
+<h2>😱 PARTE 1: O Gráfico do Inferno (JULIA)</h2>
+<p><strong>Tudo que pode dar errado em um scatter plot</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href=""></a>#| echo: true</span>
+<span id="cb2-2"><a href=""></a>#| output: true</span>
+<span id="cb2-3"><a href=""></a>#| warning: false</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a># Carregar dados</span>
+<span id="cb2-6"><a href=""></a>try</span>
+<span id="cb2-7"><a href=""></a>    global df = CSV.read("apple_stock.csv", DataFrame)</span>
+<span id="cb2-8"><a href=""></a>catch e</span>
+<span id="cb2-9"><a href=""></a>    println("⚠️  Usando dados sintéticos (arquivo não encontrado)")</span>
+<span id="cb2-10"><a href=""></a>    global df = DataFrame(</span>
+<span id="cb2-11"><a href=""></a>        Volume = rand(1e6:1e8, 1000),</span>
+<span id="cb2-12"><a href=""></a>        Close = rand(50:200, 1000) .+ randn(1000) .* 10</span>
+<span id="cb2-13"><a href=""></a>    )</span>
+<span id="cb2-14"><a href=""></a>end</span>
+<span id="cb2-15"><a href=""></a></span>
+<span id="cb2-16"><a href=""></a># ❌ O PIOR GRÁFICO POSSÍVEL</span>
+<span id="cb2-17"><a href=""></a>scatter(df.Volume, df.Close,</span>
+<span id="cb2-18"><a href=""></a>    title="graf",  # ❌ Título não informativo</span>
+<span id="cb2-19"><a href=""></a>    xlabel="x",    # ❌ Sem contexto</span>
+<span id="cb2-20"><a href=""></a>    ylabel="y",    # ❌ Sem unidades</span>
+<span id="cb2-21"><a href=""></a>    color=:rainbow,  # ❌ Cores aleatórias</span>
+<span id="cb2-22"><a href=""></a>    markersize=rand(1:20, length(df.Volume)),  # ❌ Tamanhos variados</span>
+<span id="cb2-23"><a href=""></a>    alpha=1.0,     # ❌ Sem transparência</span>
+<span id="cb2-24"><a href=""></a>    legend=false,</span>
+<span id="cb2-25"><a href=""></a>    grid=false,    # ❌ Sem grid</span>
+<span id="cb2-26"><a href=""></a>    background_color=:yellow,  # ❌ Fundo horrível</span>
+<span id="cb2-27"><a href=""></a>    foreground_color=:red,     # ❌ Texto ilegível</span>
+<span id="cb2-28"><a href=""></a>    titlefontsize=8,  # ❌ Fonte minúscula</span>
+<span id="cb2-29"><a href=""></a>    tickfontsize=5,   # ❌ Números ilegíveis</span>
+<span id="cb2-30"><a href=""></a>    size=(400, 300))  # ❌ Muito pequeno</span>
+<span id="cb2-31"><a href=""></a>savefig("julia_helll.png")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-gerado-pelo-julia" class="slide level2">
+<h2>Gráfico gerado pelo Julia</h2>
+<center>
+<img src="julia_helll.png" style="width: 80%;">
+</center>
+</section>
+<section id="mesmo-gráfico-em-python-rodando-no-julia" class="slide level2">
+<h2>😱 Mesmo Gráfico em PYTHON (rodando no Julia!)</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href=""></a>#| echo: true</span>
+<span id="cb3-2"><a href=""></a>#| output: true</span>
+<span id="cb3-3"><a href=""></a>#| warning: false</span>
+<span id="cb3-4"><a href=""></a></span>
+<span id="cb3-5"><a href=""></a>using PyCall</span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a># Rodar Python dentro do Julia usando PyCall</span>
+<span id="cb3-8"><a href=""></a>py"""</span>
+<span id="cb3-9"><a href=""></a>import pandas as pd</span>
+<span id="cb3-10"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb3-11"><a href=""></a>import numpy as np</span>
+<span id="cb3-12"><a href=""></a>import matplotlib</span>
+<span id="cb3-13"><a href=""></a>matplotlib.use('Agg')  # Backend não-interativo</span>
+<span id="cb3-14"><a href=""></a></span>
+<span id="cb3-15"><a href=""></a># Carregar dados</span>
+<span id="cb3-16"><a href=""></a>try:</span>
+<span id="cb3-17"><a href=""></a>    df = pd.read_csv('apple_stock.csv')</span>
+<span id="cb3-18"><a href=""></a>except:</span>
+<span id="cb3-19"><a href=""></a>    df = pd.DataFrame({</span>
+<span id="cb3-20"><a href=""></a>        'Volume': np.random.randint(1e6, 1e8, 1000),</span>
+<span id="cb3-21"><a href=""></a>        'Close': np.random.randint(50, 200, 1000) + np.random.randn(1000) * 10</span>
+<span id="cb3-22"><a href=""></a>    })</span>
+<span id="cb3-23"><a href=""></a></span>
+<span id="cb3-24"><a href=""></a># ❌ O PIOR GRÁFICO POSSÍVEL</span>
+<span id="cb3-25"><a href=""></a>fig, ax = plt.subplots(figsize=(4, 3), dpi=50)</span>
+<span id="cb3-26"><a href=""></a>colors = plt.cm.rainbow(np.linspace(0, 1, len(df)))</span>
+<span id="cb3-27"><a href=""></a>sizes = np.random.randint(1, 20, size=len(df))</span>
+<span id="cb3-28"><a href=""></a>ax.scatter(df['Volume'], df['Close'], c=colors, s=sizes, alpha=1.0)</span>
+<span id="cb3-29"><a href=""></a>ax.set_title('graf', fontsize=8, color='red')</span>
+<span id="cb3-30"><a href=""></a>ax.set_xlabel('x', fontsize=5)</span>
+<span id="cb3-31"><a href=""></a>ax.set_ylabel('y', fontsize=5)</span>
+<span id="cb3-32"><a href=""></a>ax.set_facecolor('yellow')</span>
+<span id="cb3-33"><a href=""></a>ax.grid(False)</span>
+<span id="cb3-34"><a href=""></a>ax.tick_params(labelsize=5)</span>
+<span id="cb3-35"><a href=""></a>plt.tight_layout()</span>
+<span id="cb3-36"><a href=""></a>plt.savefig('python_hell.png', dpi=50)</span>
+<span id="cb3-37"><a href=""></a>plt.close()</span>
+<span id="cb3-38"><a href=""></a>"""</span>
+<span id="cb3-39"><a href=""></a></span>
+<span id="cb3-40"><a href=""></a>println("✅ Gráfico Python gerado!")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-gerado-pelo-python" class="slide level2">
+<h2>Gráfico gerado pelo Python</h2>
+<center>
+<img src="python_hell.png" style="width: 80%;">
+</center>
+</section>
+<section id="mesmo-gráfico-em-r-rodando-no-julia" class="slide level2">
+<h2>😱 Mesmo Gráfico em R (rodando no Julia!)</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href=""></a>#| echo: true</span>
+<span id="cb4-2"><a href=""></a>#| output: true</span>
+<span id="cb4-3"><a href=""></a>#| warning: false</span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a>Pkg.build("RCall")</span>
+<span id="cb4-6"><a href=""></a>current_dir = pwd()</span>
+<span id="cb4-7"><a href=""></a>println("📁 Diretório atual: ", current_dir)</span>
+<span id="cb4-8"><a href=""></a># Rodar R dentro do Julia usando RCall</span>
+<span id="cb4-9"><a href=""></a>R"""</span>
+<span id="cb4-10"><a href=""></a>library(ggplot2)</span>
+<span id="cb4-11"><a href=""></a></span>
+<span id="cb4-12"><a href=""></a># Carregar dados</span>
+<span id="cb4-13"><a href=""></a>tryCatch({</span>
+<span id="cb4-14"><a href=""></a>  df &lt;- read.csv('apple_stock.csv')</span>
+<span id="cb4-15"><a href=""></a>}, error = function(e) {</span>
+<span id="cb4-16"><a href=""></a>  df &lt;&lt;- data.frame(</span>
+<span id="cb4-17"><a href=""></a>    Volume = sample(1e6:1e8, 1000, replace = TRUE),</span>
+<span id="cb4-18"><a href=""></a>    Close = sample(50:200, 1000, replace = TRUE) + rnorm(1000) * 10</span>
+<span id="cb4-19"><a href=""></a>  )</span>
+<span id="cb4-20"><a href=""></a>})</span>
+<span id="cb4-21"><a href=""></a></span>
+<span id="cb4-22"><a href=""></a>df$color_id &lt;- 1:nrow(df)</span>
+<span id="cb4-23"><a href=""></a>df$size_random &lt;- sample(1:20, nrow(df), replace = TRUE)</span>
+<span id="cb4-24"><a href=""></a></span>
+<span id="cb4-25"><a href=""></a># ❌ O PIOR GRÁFICO POSSÍVEL</span>
+<span id="cb4-26"><a href=""></a>p &lt;- ggplot(df, aes(x = Volume, y = Close)) +</span>
+<span id="cb4-27"><a href=""></a>  geom_point(aes(color = color_id, size = size_random), alpha = 1.0) +</span>
+<span id="cb4-28"><a href=""></a>  scale_color_gradientn(colors = rainbow(100)) +</span>
+<span id="cb4-29"><a href=""></a>  labs(title = 'graf', x = 'x', y = 'y') +</span>
+<span id="cb4-30"><a href=""></a>  theme(</span>
+<span id="cb4-31"><a href=""></a>    plot.background = element_rect(fill = 'yellow'),</span>
+<span id="cb4-32"><a href=""></a>    panel.background = element_rect(fill = 'yellow'),</span>
+<span id="cb4-33"><a href=""></a>    panel.grid = element_blank(),</span>
+<span id="cb4-34"><a href=""></a>    axis.text = element_text(size = 5, color = 'red'),</span>
+<span id="cb4-35"><a href=""></a>    plot.title = element_text(size = 8, color = 'red'),</span>
+<span id="cb4-36"><a href=""></a>    legend.position = 'none'</span>
+<span id="cb4-37"><a href=""></a>  )</span>
+<span id="cb4-38"><a href=""></a></span>
+<span id="cb4-39"><a href=""></a>ggsave('r_hell.png', p, width = 4, height = 3, dpi = 50)</span>
+<span id="cb4-40"><a href=""></a>"""</span>
+<span id="cb4-41"><a href=""></a></span>
+<span id="cb4-42"><a href=""></a># Exibir a imagem gerada</span>
+<span id="cb4-43"><a href=""></a>try</span>
+<span id="cb4-44"><a href=""></a>    display("image/png", read("r_hell.png"))</span>
+<span id="cb4-45"><a href=""></a>    println("✅ Gráfico R gerado!")</span>
+<span id="cb4-46"><a href=""></a>catch</span>
+<span id="cb4-47"><a href=""></a>    println("⚠️  RCall não configurado. Instale com: Pkg.build(\"RCall\")")</span>
+<span id="cb4-48"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-gerado-pelo-r" class="slide level2">
+<h2>Gráfico gerado pelo R</h2>
+<center>
+<img src="r_hell.png" style="width: 80%;">
+</center>
+</section>
+<section id="comparação-visual-3-linguagens-1-gráfico-horrível" class="slide level2">
+<h2>💡 Comparação Visual: 3 Linguagens, 1 Gráfico Horrível</h2>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="julia_helll.png" width="1100"></p>
+<figcaption>Julia</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="python_hell.png" width="1100"></p>
+<figcaption>Python</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="r_hell.png" width="1100"></p>
+<figcaption>R</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Todos igualmente ruins! 😱</strong></p>
+</section>
+<section id="correção-1-títulos-e-labels-julia" class="slide level2">
+<h2>✅ CORREÇÃO 1: Títulos e Labels (JULIA)</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href=""></a>#| echo: true</span>
+<span id="cb5-2"><a href=""></a>#| output: true</span>
+<span id="cb5-3"><a href=""></a>#| warning: false</span>
+<span id="cb5-4"><a href=""></a></span>
+<span id="cb5-5"><a href=""></a>using CSV, DataFrames, Plots</span>
+<span id="cb5-6"><a href=""></a></span>
+<span id="cb5-7"><a href=""></a># Carregar dados</span>
+<span id="cb5-8"><a href=""></a>try</span>
+<span id="cb5-9"><a href=""></a>    global df = CSV.read("apple_stock.csv", DataFrame)</span>
+<span id="cb5-10"><a href=""></a>catch e</span>
+<span id="cb5-11"><a href=""></a>    println("⚠️  Usando dados sintéticos (arquivo não encontrado)")</span>
+<span id="cb5-12"><a href=""></a>    global df = DataFrame(</span>
+<span id="cb5-13"><a href=""></a>        Volume = rand(1_000_000:100_000_000, 1000),</span>
+<span id="cb5-14"><a href=""></a>        Close = rand(50:200, 1000) .+ randn(1000) .* 10</span>
+<span id="cb5-15"><a href=""></a>    )</span>
+<span id="cb5-16"><a href=""></a>end</span>
+<span id="cb5-17"><a href=""></a></span>
+<span id="cb5-18"><a href=""></a># ✅ MELHORIA: Título e eixos descritivos</span>
+<span id="cb5-19"><a href=""></a>scatter(df.Volume, df.Close,</span>
+<span id="cb5-20"><a href=""></a>    title="AAPL - Relação entre Volume e Preço de Fechamento",  # ✅</span>
+<span id="cb5-21"><a href=""></a>    xlabel="Volume Negociado (unidades)",  # ✅</span>
+<span id="cb5-22"><a href=""></a>    ylabel="Preço de Fechamento (USD)",  # ✅</span>
+<span id="cb5-23"><a href=""></a>    color=:rainbow,  # Ainda ruim, mas vamos corrigir depois</span>
+<span id="cb5-24"><a href=""></a>    markersize=rand(1:20, length(df.Volume)),</span>
+<span id="cb5-25"><a href=""></a>    alpha=1.0,</span>
+<span id="cb5-26"><a href=""></a>    legend=false,</span>
+<span id="cb5-27"><a href=""></a>    grid=false,</span>
+<span id="cb5-28"><a href=""></a>    background_color=:yellow,</span>
+<span id="cb5-29"><a href=""></a>    foreground_color=:red,</span>
+<span id="cb5-30"><a href=""></a>    titlefontsize=8,</span>
+<span id="cb5-31"><a href=""></a>    tickfontsize=5,</span>
+<span id="cb5-32"><a href=""></a>    size=(400, 300))</span>
+<span id="cb5-33"><a href=""></a>savefig("julia_v1.png")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-julia---versão-1" class="slide level2">
+<h2>Gráfico Julia - versão 1</h2>
+<center>
+<img src="julia_v1.png" style="width: 80%;">
+</center>
+</section>
+<section id="correção-1-títulos-e-labels-python" class="slide level2">
+<h2>✅ CORREÇÃO 1: Títulos e Labels (PYTHON)</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb6-1"><a href=""></a>#| echo: true</span>
+<span id="cb6-2"><a href=""></a>#| output: true</span>
+<span id="cb6-3"><a href=""></a>#| warning: false</span>
+<span id="cb6-4"><a href=""></a></span>
+<span id="cb6-5"><a href=""></a>using PyCall</span>
+<span id="cb6-6"><a href=""></a></span>
+<span id="cb6-7"><a href=""></a>py"""</span>
+<span id="cb6-8"><a href=""></a>import pandas as pd</span>
+<span id="cb6-9"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb6-10"><a href=""></a>import numpy as np</span>
+<span id="cb6-11"><a href=""></a>import matplotlib</span>
+<span id="cb6-12"><a href=""></a>matplotlib.use('Agg')</span>
+<span id="cb6-13"><a href=""></a></span>
+<span id="cb6-14"><a href=""></a># Recarregar dados (Python precisa do próprio df)</span>
+<span id="cb6-15"><a href=""></a>try:</span>
+<span id="cb6-16"><a href=""></a>    df = pd.read_csv('apple_stock.csv')</span>
+<span id="cb6-17"><a href=""></a>except:</span>
+<span id="cb6-18"><a href=""></a>    df = pd.DataFrame({</span>
+<span id="cb6-19"><a href=""></a>        'Volume': np.random.randint(1e6, 1e8, 1000),</span>
+<span id="cb6-20"><a href=""></a>        'Close': np.random.randint(50, 200, 1000) + np.random.randn(1000) * 10</span>
+<span id="cb6-21"><a href=""></a>    })</span>
+<span id="cb6-22"><a href=""></a></span>
+<span id="cb6-23"><a href=""></a>fig, ax = plt.subplots(figsize=(4, 3), dpi=50)</span>
+<span id="cb6-24"><a href=""></a>colors = plt.cm.rainbow(np.linspace(0, 1, len(df)))</span>
+<span id="cb6-25"><a href=""></a>sizes = np.random.randint(1, 20, size=len(df))</span>
+<span id="cb6-26"><a href=""></a>ax.scatter(df['Volume'], df['Close'], c=colors, s=sizes, alpha=1.0)</span>
+<span id="cb6-27"><a href=""></a></span>
+<span id="cb6-28"><a href=""></a># ✅ MELHORIAS</span>
+<span id="cb6-29"><a href=""></a>ax.set_title('AAPL - Relação entre Volume e Preço de Fechamento', fontsize=8, color='red')</span>
+<span id="cb6-30"><a href=""></a>ax.set_xlabel('Volume Negociado (unidades)', fontsize=5)</span>
+<span id="cb6-31"><a href=""></a>ax.set_ylabel('Preço de Fechamento (USD)', fontsize=5)</span>
+<span id="cb6-32"><a href=""></a>ax.set_facecolor('yellow')</span>
+<span id="cb6-33"><a href=""></a>ax.grid(False)</span>
+<span id="cb6-34"><a href=""></a>ax.tick_params(labelsize=5)</span>
+<span id="cb6-35"><a href=""></a>plt.tight_layout()</span>
+<span id="cb6-36"><a href=""></a>plt.savefig('python_v1.png', dpi=50)</span>
+<span id="cb6-37"><a href=""></a>plt.close()</span>
+<span id="cb6-38"><a href=""></a>"""</span>
+<span id="cb6-39"><a href=""></a></span>
+<span id="cb6-40"><a href=""></a># Verificar</span>
+<span id="cb6-41"><a href=""></a>if isfile("python_v1.png")</span>
+<span id="cb6-42"><a href=""></a>    println("✅ Gráfico Python v1 gerado!")</span>
+<span id="cb6-43"><a href=""></a>else</span>
+<span id="cb6-44"><a href=""></a>    println("❌ Arquivo não criado")</span>
+<span id="cb6-45"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-python---versão-1" class="slide level2">
+<h2>Gráfico Python - versão 1</h2>
+<center>
+<img src="python_v1.png" style="width: 80%;">
+</center>
+</section>
+<section id="correção-1-títulos-e-labels-r" class="slide level2">
+<h2>✅ CORREÇÃO 1: Títulos e Labels (R)</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href=""></a>#| echo: true</span>
+<span id="cb7-2"><a href=""></a>#| output: true</span>
+<span id="cb7-3"><a href=""></a>#| warning: false</span>
+<span id="cb7-4"><a href=""></a></span>
+<span id="cb7-5"><a href=""></a>using RCall</span>
+<span id="cb7-6"><a href=""></a></span>
+<span id="cb7-7"><a href=""></a>R"""</span>
+<span id="cb7-8"><a href=""></a>library(ggplot2)</span>
+<span id="cb7-9"><a href=""></a></span>
+<span id="cb7-10"><a href=""></a># Recarregar dados no R - CORREÇÃO: garantir que df sempre existe</span>
+<span id="cb7-11"><a href=""></a>df &lt;- NULL</span>
+<span id="cb7-12"><a href=""></a>tryCatch({</span>
+<span id="cb7-13"><a href=""></a>  df &lt;- read.csv('apple_stock.csv')</span>
+<span id="cb7-14"><a href=""></a>}, error = function(e) {</span>
+<span id="cb7-15"><a href=""></a>  df &lt;&lt;- data.frame(</span>
+<span id="cb7-16"><a href=""></a>    Volume = sample(1e6:1e8, 1000, replace = TRUE),</span>
+<span id="cb7-17"><a href=""></a>    Close = sample(50:200, 1000, replace = TRUE) + rnorm(1000) * 10</span>
+<span id="cb7-18"><a href=""></a>  )</span>
+<span id="cb7-19"><a href=""></a>})</span>
+<span id="cb7-20"><a href=""></a></span>
+<span id="cb7-21"><a href=""></a># Se df ainda for NULL, criar dados sintéticos</span>
+<span id="cb7-22"><a href=""></a>if (is.null(df)) {</span>
+<span id="cb7-23"><a href=""></a>  df &lt;- data.frame(</span>
+<span id="cb7-24"><a href=""></a>    Volume = sample(1e6:1e8, 1000, replace = TRUE),</span>
+<span id="cb7-25"><a href=""></a>    Close = sample(50:200, 1000, replace = TRUE) + rnorm(1000) * 10</span>
+<span id="cb7-26"><a href=""></a>  )</span>
+<span id="cb7-27"><a href=""></a>}</span>
+<span id="cb7-28"><a href=""></a></span>
+<span id="cb7-29"><a href=""></a>df$color_id &lt;- 1:nrow(df)</span>
+<span id="cb7-30"><a href=""></a>df$size_random &lt;- sample(1:20, nrow(df), replace = TRUE)</span>
+<span id="cb7-31"><a href=""></a></span>
+<span id="cb7-32"><a href=""></a>p &lt;- ggplot(df, aes(x = Volume, y = Close)) +</span>
+<span id="cb7-33"><a href=""></a>  geom_point(aes(color = color_id, size = size_random), alpha = 1.0) +</span>
+<span id="cb7-34"><a href=""></a>  scale_color_gradientn(colors = rainbow(100)) +</span>
+<span id="cb7-35"><a href=""></a>  # ✅ MELHORIAS</span>
+<span id="cb7-36"><a href=""></a>  labs(title = 'AAPL - Relação entre Volume e Preço de Fechamento',</span>
+<span id="cb7-37"><a href=""></a>       x = 'Volume Negociado (unidades)',</span>
+<span id="cb7-38"><a href=""></a>       y = 'Preço de Fechamento (USD)') +</span>
+<span id="cb7-39"><a href=""></a>  theme(</span>
+<span id="cb7-40"><a href=""></a>    plot.background = element_rect(fill = 'yellow'),</span>
+<span id="cb7-41"><a href=""></a>    panel.background = element_rect(fill = 'yellow'),</span>
+<span id="cb7-42"><a href=""></a>    panel.grid = element_blank(),</span>
+<span id="cb7-43"><a href=""></a>    axis.text = element_text(size = 5, color = 'red'),</span>
+<span id="cb7-44"><a href=""></a>    plot.title = element_text(size = 8, color = 'red'),</span>
+<span id="cb7-45"><a href=""></a>    legend.position = 'none'</span>
+<span id="cb7-46"><a href=""></a>  )</span>
+<span id="cb7-47"><a href=""></a></span>
+<span id="cb7-48"><a href=""></a>ggsave('r_v1.png', p, width = 4, height = 3, dpi = 50)</span>
+<span id="cb7-49"><a href=""></a>"""</span>
+<span id="cb7-50"><a href=""></a></span>
+<span id="cb7-51"><a href=""></a># Verificar</span>
+<span id="cb7-52"><a href=""></a>if isfile("r_v1.png")</span>
+<span id="cb7-53"><a href=""></a>    println("✅ Gráfico R v1 gerado!")</span>
+<span id="cb7-54"><a href=""></a>else</span>
+<span id="cb7-55"><a href=""></a>    println("❌ Arquivo não criado")</span>
+<span id="cb7-56"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-r---versão-1" class="slide level2">
+<h2>Gráfico R - versão 1</h2>
+<center>
+<img src="r_v1.png" style="width: 80%;">
+</center>
+</section>
+<section id="correção-2-cores-com-propósito-python" class="slide level2">
+<h2>✅ CORREÇÃO 2: Cores com Propósito (Python)</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href=""></a>#| echo: true</span>
+<span id="cb8-2"><a href=""></a>#| output: true</span>
+<span id="cb8-3"><a href=""></a>using PyCall</span>
+<span id="cb8-4"><a href=""></a></span>
+<span id="cb8-5"><a href=""></a>py"""</span>
+<span id="cb8-6"><a href=""></a>import pandas as pd</span>
+<span id="cb8-7"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb8-8"><a href=""></a>import numpy as np</span>
+<span id="cb8-9"><a href=""></a>import matplotlib</span>
+<span id="cb8-10"><a href=""></a>matplotlib.use('Agg')</span>
+<span id="cb8-11"><a href=""></a></span>
+<span id="cb8-12"><a href=""></a># Recarregar dados</span>
+<span id="cb8-13"><a href=""></a>try:</span>
+<span id="cb8-14"><a href=""></a>    df = pd.read_csv('apple_stock.csv')</span>
+<span id="cb8-15"><a href=""></a>except:</span>
+<span id="cb8-16"><a href=""></a>    df = pd.DataFrame({</span>
+<span id="cb8-17"><a href=""></a>        'Volume': np.random.randint(1e6, 1e8, 1000),</span>
+<span id="cb8-18"><a href=""></a>        'Close': np.random.randint(50, 200, 1000) + np.random.randn(1000) * 10</span>
+<span id="cb8-19"><a href=""></a>    })</span>
+<span id="cb8-20"><a href=""></a></span>
+<span id="cb8-21"><a href=""></a>fig, ax = plt.subplots(figsize=(4, 3), dpi=50)</span>
+<span id="cb8-22"><a href=""></a>sizes = np.random.randint(1, 20, size=len(df))</span>
+<span id="cb8-23"><a href=""></a></span>
+<span id="cb8-24"><a href=""></a># ✅ Cor consistente</span>
+<span id="cb8-25"><a href=""></a>ax.scatter(df['Volume'], df['Close'], c='steelblue', s=sizes, alpha=1.0)</span>
+<span id="cb8-26"><a href=""></a>ax.set_title('AAPL - Relação entre Volume e Preço de Fechamento', </span>
+<span id="cb8-27"><a href=""></a>             fontsize=8, color='red')</span>
+<span id="cb8-28"><a href=""></a>ax.set_xlabel('Volume Negociado (unidades)', fontsize=5)</span>
+<span id="cb8-29"><a href=""></a>ax.set_ylabel('Preço de Fechamento (USD)', fontsize=5)</span>
+<span id="cb8-30"><a href=""></a>ax.set_facecolor('yellow')</span>
+<span id="cb8-31"><a href=""></a>ax.grid(False)</span>
+<span id="cb8-32"><a href=""></a>ax.tick_params(labelsize=5)</span>
+<span id="cb8-33"><a href=""></a>plt.tight_layout()</span>
+<span id="cb8-34"><a href=""></a>plt.savefig('python_v2.png', dpi=50)</span>
+<span id="cb8-35"><a href=""></a>plt.close()</span>
+<span id="cb8-36"><a href=""></a>"""</span>
+<span id="cb8-37"><a href=""></a></span>
+<span id="cb8-38"><a href=""></a># Verificar</span>
+<span id="cb8-39"><a href=""></a>if isfile("python_v2.png")</span>
+<span id="cb8-40"><a href=""></a>    println("✅ Gráfico Python v2 gerado!")</span>
+<span id="cb8-41"><a href=""></a>else</span>
+<span id="cb8-42"><a href=""></a>    println("❌ Arquivo não criado")</span>
+<span id="cb8-43"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-python---versão-2" class="slide level2">
+<h2>Gráfico Python - versão 2</h2>
+<center>
+<img src="python_v2.png" style="width: 80%;">
+</center>
+</section>
+<section id="correção-2-cores-com-propósito-r" class="slide level2">
+<h2>✅ CORREÇÃO 2: Cores com Propósito (R)</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href=""></a>#| echo: true</span>
+<span id="cb9-2"><a href=""></a>#| output: true</span>
+<span id="cb9-3"><a href=""></a>#| warning: false</span>
+<span id="cb9-4"><a href=""></a></span>
+<span id="cb9-5"><a href=""></a>using RCall</span>
+<span id="cb9-6"><a href=""></a></span>
+<span id="cb9-7"><a href=""></a>R"""</span>
+<span id="cb9-8"><a href=""></a>library(ggplot2)</span>
+<span id="cb9-9"><a href=""></a></span>
+<span id="cb9-10"><a href=""></a># Recarregar dados</span>
+<span id="cb9-11"><a href=""></a>tryCatch({</span>
+<span id="cb9-12"><a href=""></a>  df &lt;- read.csv('apple_stock.csv')</span>
+<span id="cb9-13"><a href=""></a>}, error = function(e) {</span>
+<span id="cb9-14"><a href=""></a>  df &lt;&lt;- data.frame(</span>
+<span id="cb9-15"><a href=""></a>    Volume = sample(1e6:1e8, 1000, replace = TRUE),</span>
+<span id="cb9-16"><a href=""></a>    Close = sample(50:200, 1000, replace = TRUE) + rnorm(1000) * 10</span>
+<span id="cb9-17"><a href=""></a>  )</span>
+<span id="cb9-18"><a href=""></a>})</span>
+<span id="cb9-19"><a href=""></a></span>
+<span id="cb9-20"><a href=""></a>df$size_random &lt;- sample(1:20, nrow(df), replace = TRUE)</span>
+<span id="cb9-21"><a href=""></a></span>
+<span id="cb9-22"><a href=""></a>p &lt;- ggplot(df, aes(x = Volume, y = Close)) +</span>
+<span id="cb9-23"><a href=""></a>  # ✅ Cor consistente</span>
+<span id="cb9-24"><a href=""></a>  geom_point(aes(size = size_random), color = 'steelblue', alpha = 1.0) +</span>
+<span id="cb9-25"><a href=""></a>  labs(title = 'AAPL - Relação entre Volume e Preço de Fechamento',</span>
+<span id="cb9-26"><a href=""></a>       x = 'Volume Negociado (unidades)',</span>
+<span id="cb9-27"><a href=""></a>       y = 'Preço de Fechamento (USD)') +</span>
+<span id="cb9-28"><a href=""></a>  theme(</span>
+<span id="cb9-29"><a href=""></a>    plot.background = element_rect(fill = 'yellow'),</span>
+<span id="cb9-30"><a href=""></a>    panel.background = element_rect(fill = 'yellow'),</span>
+<span id="cb9-31"><a href=""></a>    panel.grid = element_blank(),</span>
+<span id="cb9-32"><a href=""></a>    axis.text = element_text(size = 5, color = 'red'),</span>
+<span id="cb9-33"><a href=""></a>    plot.title = element_text(size = 8, color = 'red'),</span>
+<span id="cb9-34"><a href=""></a>    legend.position = 'none'</span>
+<span id="cb9-35"><a href=""></a>  )</span>
+<span id="cb9-36"><a href=""></a></span>
+<span id="cb9-37"><a href=""></a>ggsave('r_v2.png', p, width = 4, height = 3, dpi = 50)</span>
+<span id="cb9-38"><a href=""></a>"""</span>
+<span id="cb9-39"><a href=""></a></span>
+<span id="cb9-40"><a href=""></a># Verificar</span>
+<span id="cb9-41"><a href=""></a>if isfile("r_v2.png")</span>
+<span id="cb9-42"><a href=""></a>    println("✅ Gráfico R v2 gerado!")</span>
+<span id="cb9-43"><a href=""></a>else</span>
+<span id="cb9-44"><a href=""></a>    println("❌ Arquivo não criado")</span>
+<span id="cb9-45"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-r---versão-2" class="slide level2">
+<h2>Gráfico R - versão 2</h2>
+<center>
+<img src="r_v2.png" style="width: 80%;">
+</center>
+</section>
+<section id="correção-3-transparência-e-tamanho-julia" class="slide level2">
+<h2>✅ CORREÇÃO 3: Transparência e Tamanho (JULIA)</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb10-1"><a href=""></a>#| echo: true</span>
+<span id="cb10-2"><a href=""></a>#| output: true</span>
+<span id="cb10-3"><a href=""></a></span>
+<span id="cb10-4"><a href=""></a>scatter(df.Volume, df.Close,</span>
+<span id="cb10-5"><a href=""></a>    title="AAPL - Relação entre Volume e Preço de Fechamento",</span>
+<span id="cb10-6"><a href=""></a>    xlabel="Volume Negociado (unidades)",</span>
+<span id="cb10-7"><a href=""></a>    ylabel="Preço de Fechamento (USD)",</span>
+<span id="cb10-8"><a href=""></a>    color=:steelblue,</span>
+<span id="cb10-9"><a href=""></a>    markersize=4,  # ✅ Tamanho consistente</span>
+<span id="cb10-10"><a href=""></a>    alpha=0.5,     # ✅ Transparência</span>
+<span id="cb10-11"><a href=""></a>    legend=false,</span>
+<span id="cb10-12"><a href=""></a>    grid=false,</span>
+<span id="cb10-13"><a href=""></a>    background_color=:yellow,</span>
+<span id="cb10-14"><a href=""></a>    foreground_color=:red,</span>
+<span id="cb10-15"><a href=""></a>    titlefontsize=8,</span>
+<span id="cb10-16"><a href=""></a>    tickfontsize=5,</span>
+<span id="cb10-17"><a href=""></a>    size=(400, 300))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="correção-final-gráfico-perfeito-julia" class="slide level2">
+<h2>✅ CORREÇÃO FINAL: Gráfico Perfeito (JULIA)</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb11-1"><a href=""></a>#| echo: true</span>
+<span id="cb11-2"><a href=""></a>#| output: true</span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a># Limpar dados</span>
+<span id="cb11-5"><a href=""></a>df_clean = dropmissing(df[!, [:Close, :Volume]])</span>
+<span id="cb11-6"><a href=""></a>df_clean = df_clean[df_clean.Volume .&gt; 0, :]</span>
+<span id="cb11-7"><a href=""></a>df_sample = last(df_clean, 500)</span>
+<span id="cb11-8"><a href=""></a></span>
+<span id="cb11-9"><a href=""></a># 🎉 GRÁFICO PERFEITO</span>
+<span id="cb11-10"><a href=""></a>scatter(df_sample.Volume, df_sample.Close,</span>
+<span id="cb11-11"><a href=""></a>    title="AAPL - Relação entre Volume e Preço de Fechamento",</span>
+<span id="cb11-12"><a href=""></a>    xlabel="Volume Negociado (unidades)",</span>
+<span id="cb11-13"><a href=""></a>    ylabel="Preço de Fechamento (USD)",</span>
+<span id="cb11-14"><a href=""></a>    color=:steelblue,     # ✅</span>
+<span id="cb11-15"><a href=""></a>    markersize=4,         # ✅</span>
+<span id="cb11-16"><a href=""></a>    alpha=0.6,            # ✅</span>
+<span id="cb11-17"><a href=""></a>    legend=false,</span>
+<span id="cb11-18"><a href=""></a>    grid=true,            # ✅</span>
+<span id="cb11-19"><a href=""></a>    background_color=:white,  # ✅</span>
+<span id="cb11-20"><a href=""></a>    foreground_color=:black,  # ✅</span>
+<span id="cb11-21"><a href=""></a>    titlefontsize=14,     # ✅</span>
+<span id="cb11-22"><a href=""></a>    tickfontsize=10,      # ✅</span>
+<span id="cb11-23"><a href=""></a>    guidefontsize=12,     # ✅</span>
+<span id="cb11-24"><a href=""></a>    size=(1000, 700),     # ✅</span>
+<span id="cb11-25"><a href=""></a>    dpi=300)              # ✅</span>
+<span id="cb11-26"><a href=""></a>savefig("julia_final.png")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-julia---versão-final-perfeita" class="slide level2">
+<h2>Gráfico Julia - Versão Final (perfeita)</h2>
+<center>
+<img src="julia_final.png" style="width: 80%;">
+</center>
+</section>
+<section id="correção-final-gráfico-perfeito-python" class="slide level2">
+<h2>✅ CORREÇÃO FINAL: Gráfico Perfeito (PYTHON)</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href=""></a>#| echo: true</span>
+<span id="cb12-2"><a href=""></a>#| output: true</span>
+<span id="cb12-3"><a href=""></a>#| warning: false</span>
+<span id="cb12-4"><a href=""></a></span>
+<span id="cb12-5"><a href=""></a>using PyCall</span>
+<span id="cb12-6"><a href=""></a></span>
+<span id="cb12-7"><a href=""></a>py"""</span>
+<span id="cb12-8"><a href=""></a>import pandas as pd</span>
+<span id="cb12-9"><a href=""></a>import matplotlib</span>
+<span id="cb12-10"><a href=""></a>matplotlib.use('Agg')</span>
+<span id="cb12-11"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb12-12"><a href=""></a>import numpy as np</span>
+<span id="cb12-13"><a href=""></a></span>
+<span id="cb12-14"><a href=""></a># Recarregar dados</span>
+<span id="cb12-15"><a href=""></a>try:</span>
+<span id="cb12-16"><a href=""></a>    df = pd.read_csv('apple_stock.csv')</span>
+<span id="cb12-17"><a href=""></a>except:</span>
+<span id="cb12-18"><a href=""></a>    df = pd.DataFrame({</span>
+<span id="cb12-19"><a href=""></a>        'Volume': np.random.randint(1e6, 1e8, 1000),</span>
+<span id="cb12-20"><a href=""></a>        'Close': np.random.randint(50, 200, 1000) + np.random.randn(1000) * 10</span>
+<span id="cb12-21"><a href=""></a>    })</span>
+<span id="cb12-22"><a href=""></a></span>
+<span id="cb12-23"><a href=""></a># Limpar dados</span>
+<span id="cb12-24"><a href=""></a>df_clean = df.dropna(subset=['Close', 'Volume'])</span>
+<span id="cb12-25"><a href=""></a>df_clean = df_clean[df_clean['Volume'] &gt; 0].tail(500)</span>
+<span id="cb12-26"><a href=""></a></span>
+<span id="cb12-27"><a href=""></a># 🎉 GRÁFICO PERFEITO</span>
+<span id="cb12-28"><a href=""></a>fig, ax = plt.subplots(figsize=(10, 7), dpi=300)</span>
+<span id="cb12-29"><a href=""></a>ax.scatter(df_clean['Volume'], df_clean['Close'], </span>
+<span id="cb12-30"><a href=""></a>           c='steelblue', s=16, alpha=0.6)</span>
+<span id="cb12-31"><a href=""></a>ax.set_title('AAPL - Relação entre Volume e Preço de Fechamento', fontsize=14)</span>
+<span id="cb12-32"><a href=""></a>ax.set_xlabel('Volume Negociado (unidades)', fontsize=12)</span>
+<span id="cb12-33"><a href=""></a>ax.set_ylabel('Preço de Fechamento (USD)', fontsize=12)</span>
+<span id="cb12-34"><a href=""></a>ax.set_facecolor('white')</span>
+<span id="cb12-35"><a href=""></a>ax.grid(True, alpha=0.3)</span>
+<span id="cb12-36"><a href=""></a>ax.tick_params(labelsize=10)</span>
+<span id="cb12-37"><a href=""></a>plt.tight_layout()</span>
+<span id="cb12-38"><a href=""></a>plt.savefig('python_final.png', dpi=300, bbox_inches='tight')</span>
+<span id="cb12-39"><a href=""></a>plt.close()</span>
+<span id="cb12-40"><a href=""></a>"""</span>
+<span id="cb12-41"><a href=""></a></span>
+<span id="cb12-42"><a href=""></a># Verificar</span>
+<span id="cb12-43"><a href=""></a>if isfile("python_final.png")</span>
+<span id="cb12-44"><a href=""></a>    println("✅ Gráfico Python perfeito gerado!")</span>
+<span id="cb12-45"><a href=""></a>else</span>
+<span id="cb12-46"><a href=""></a>    println("❌ Arquivo não criado")</span>
+<span id="cb12-47"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-python---versão-final-perfeita" class="slide level2">
+<h2>Gráfico Python - Versão Final (perfeita)</h2>
+<center>
+<img src="python_final.png" style="width: 80%;">
+</center>
+</section>
+<section id="correção-final-gráfico-perfeito-r" class="slide level2">
+<h2>✅ CORREÇÃO FINAL: Gráfico Perfeito (R)</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb13-1"><a href=""></a>#| echo: true</span>
+<span id="cb13-2"><a href=""></a>#| output: true</span>
+<span id="cb13-3"><a href=""></a>#| warning: false</span>
+<span id="cb13-4"><a href=""></a></span>
+<span id="cb13-5"><a href=""></a>using RCall</span>
+<span id="cb13-6"><a href=""></a></span>
+<span id="cb13-7"><a href=""></a>R"""</span>
+<span id="cb13-8"><a href=""></a>library(ggplot2)</span>
+<span id="cb13-9"><a href=""></a></span>
+<span id="cb13-10"><a href=""></a># Recarregar dados</span>
+<span id="cb13-11"><a href=""></a>tryCatch({</span>
+<span id="cb13-12"><a href=""></a>  df &lt;- read.csv('apple_stock.csv')</span>
+<span id="cb13-13"><a href=""></a>}, error = function(e) {</span>
+<span id="cb13-14"><a href=""></a>  df &lt;- data.frame(</span>
+<span id="cb13-15"><a href=""></a>    Volume = sample(1e6:1e8, 1000, replace = TRUE),</span>
+<span id="cb13-16"><a href=""></a>    Close = sample(50:200, 1000, replace = TRUE) + rnorm(1000) * 10</span>
+<span id="cb13-17"><a href=""></a>  )</span>
+<span id="cb13-18"><a href=""></a>})</span>
+<span id="cb13-19"><a href=""></a></span>
+<span id="cb13-20"><a href=""></a># Limpar dados</span>
+<span id="cb13-21"><a href=""></a>df_clean &lt;- df[!is.na(df$Volume) &amp; !is.na(df$Close) &amp; df$Volume &gt; 0, ]</span>
+<span id="cb13-22"><a href=""></a>df_clean &lt;- tail(df_clean, 500)</span>
+<span id="cb13-23"><a href=""></a></span>
+<span id="cb13-24"><a href=""></a># 🎉 GRÁFICO PERFEITO</span>
+<span id="cb13-25"><a href=""></a>p &lt;- ggplot(df_clean, aes(x = Volume, y = Close)) +</span>
+<span id="cb13-26"><a href=""></a>  geom_point(color = 'steelblue', size = 2, alpha = 0.6) +</span>
+<span id="cb13-27"><a href=""></a>  labs(title = 'AAPL - Relação entre Volume e Preço de Fechamento',</span>
+<span id="cb13-28"><a href=""></a>       x = 'Volume Negociado (unidades)',</span>
+<span id="cb13-29"><a href=""></a>       y = 'Preço de Fechamento (USD)') +</span>
+<span id="cb13-30"><a href=""></a>  theme_minimal() +</span>
+<span id="cb13-31"><a href=""></a>  theme(</span>
+<span id="cb13-32"><a href=""></a>    plot.title = element_text(size = 14, hjust = 0.5),</span>
+<span id="cb13-33"><a href=""></a>    axis.title = element_text(size = 12),</span>
+<span id="cb13-34"><a href=""></a>    axis.text = element_text(size = 10),</span>
+<span id="cb13-35"><a href=""></a>    panel.grid.major = element_line(color = 'gray80', linewidth = 0.5),  # ✅ Corrigido</span>
+<span id="cb13-36"><a href=""></a>    panel.grid.minor = element_blank(),</span>
+<span id="cb13-37"><a href=""></a>    plot.background = element_rect(fill = 'white', color = NA),</span>
+<span id="cb13-38"><a href=""></a>    panel.background = element_rect(fill = 'white')</span>
+<span id="cb13-39"><a href=""></a>  )</span>
+<span id="cb13-40"><a href=""></a></span>
+<span id="cb13-41"><a href=""></a>ggsave('r_final.png', p, width = 10, height = 7, dpi = 300)</span>
+<span id="cb13-42"><a href=""></a>"""</span>
+<span id="cb13-43"><a href=""></a></span>
+<span id="cb13-44"><a href=""></a># Verificar</span>
+<span id="cb13-45"><a href=""></a>if isfile("r_final.png")</span>
+<span id="cb13-46"><a href=""></a>    println("✅ Gráfico R perfeito gerado!")</span>
+<span id="cb13-47"><a href=""></a>else</span>
+<span id="cb13-48"><a href=""></a>    println("❌ Arquivo não criado")</span>
+<span id="cb13-49"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-r---versão-final-perfeita" class="slide level2">
+<h2>Gráfico R - Versão Final (perfeita)</h2>
+<center>
+<img src="r_final.png" style="width: 80%;">
+</center>
+</section>
+<section id="checklist-de-boas-práticas" class="slide level2">
+<h2>🎨 Checklist de Boas Práticas</h2>
+<div>
+<p>✅ <strong>Título descritivo</strong>: O que, onde, quando<br>
+✅ <strong>Eixos claros</strong>: Variável + unidade<br>
+✅ <strong>Cores com propósito</strong>: Máx 3-5 cores<br>
+✅ <strong>Transparência</strong>: Para ver sobreposições<br>
+✅ <strong>Tamanho adequado</strong>: Mín 800x600px<br>
+✅ <strong>Fonte legível</strong>: Mín 10pt<br>
+✅ <strong>Grid</strong>: Facilita leitura<br>
+✅ <strong>Fundo neutro</strong>: Branco ou cinza claro<br>
+✅ <strong>Alta resolução</strong>: DPI ≥ 300</p>
+</div>
+</section>
+<section id="próximos-slides" class="slide level2">
+<h2>🎯 Próximos Slides</h2>
+<p>Nos próximos slides veremos:</p>
+<ol type="1">
+<li><strong>Regressão Linear</strong> (2 quantitativas)</li>
+<li><strong>Distribuições</strong> (1 quantitativa)</li>
+<li><strong>Boxplot/Violin</strong> (1 quant + 1 cat)</li>
+<li><strong>Correlação</strong> (heatmap)</li>
+<li><strong>Séries Temporais</strong> (temporal)</li>
+<li><strong>Diagnóstico de Modelos</strong></li>
+<li><strong>Dashboard EDA Completo</strong></li>
+</ol>
+<p>Sempre comparando <strong>Julia, Python e R</strong>!</p>
+</section>
+<section class="slide level2">
+
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Continue Explorando</strong></p>
+</div>
+<div class="callout-content">
+<p>Os próximos slides têm análises completas com os 3 ambientes rodando em paralelo!</p>
+</div>
+</div>
+</div>
+<p>:::</p>
+</section>
+<section id="python-regressão-linear" class="slide level2">
+<h2>🐍 Python: Regressão Linear</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href=""></a>#| echo: true</span>
+<span id="cb14-2"><a href=""></a>#| output: true</span>
+<span id="cb14-3"><a href=""></a>#| eval: true</span>
+<span id="cb14-4"><a href=""></a>using PyCall</span>
+<span id="cb14-5"><a href=""></a></span>
+<span id="cb14-6"><a href=""></a>println("🐍 Regressão Python com apple_stock.csv...\n")</span>
+<span id="cb14-7"><a href=""></a></span>
+<span id="cb14-8"><a href=""></a>py"""</span>
+<span id="cb14-9"><a href=""></a>import pandas as pd</span>
+<span id="cb14-10"><a href=""></a>import numpy as np</span>
+<span id="cb14-11"><a href=""></a>import matplotlib</span>
+<span id="cb14-12"><a href=""></a>matplotlib.use('Agg')</span>
+<span id="cb14-13"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb14-14"><a href=""></a>import os</span>
+<span id="cb14-15"><a href=""></a></span>
+<span id="cb14-16"><a href=""></a># Carregar arquivo apple_stock.csv</span>
+<span id="cb14-17"><a href=""></a>if not os.path.exists('apple_stock.csv'):</span>
+<span id="cb14-18"><a href=""></a>    raise FileNotFoundError("❌ Arquivo 'apple_stock.csv' não encontrado!")</span>
+<span id="cb14-19"><a href=""></a></span>
+<span id="cb14-20"><a href=""></a>df = pd.read_csv('apple_stock.csv')</span>
+<span id="cb14-21"><a href=""></a>print(f"✅ apple_stock.csv carregado")</span>
+<span id="cb14-22"><a href=""></a>print(f"   Colunas: {list(df.columns)}")</span>
+<span id="cb14-23"><a href=""></a>print(f"   Linhas: {len(df)}")</span>
+<span id="cb14-24"><a href=""></a></span>
+<span id="cb14-25"><a href=""></a># Limpar</span>
+<span id="cb14-26"><a href=""></a>df = df.dropna(subset=['Close', 'Volume'])</span>
+<span id="cb14-27"><a href=""></a>df = df[df['Volume'] &gt; 0].tail(500)</span>
+<span id="cb14-28"><a href=""></a></span>
+<span id="cb14-29"><a href=""></a>x = df['Volume'].values</span>
+<span id="cb14-30"><a href=""></a>y = df['Close'].values</span>
+<span id="cb14-31"><a href=""></a></span>
+<span id="cb14-32"><a href=""></a>print(f"📈 {len(df)} registros após limpeza")</span>
+<span id="cb14-33"><a href=""></a>print(f"   Volume: {x.min():.0f} - {x.max():.0f}")</span>
+<span id="cb14-34"><a href=""></a>print(f"   Close: {y.min():.2f} - {y.max():.2f}\n")</span>
+<span id="cb14-35"><a href=""></a></span>
+<span id="cb14-36"><a href=""></a># REGRESSÃO LINEAR MANUAL</span>
+<span id="cb14-37"><a href=""></a>n = len(x)</span>
+<span id="cb14-38"><a href=""></a>x_mean = np.mean(x)</span>
+<span id="cb14-39"><a href=""></a>y_mean = np.mean(y)</span>
+<span id="cb14-40"><a href=""></a></span>
+<span id="cb14-41"><a href=""></a># Calcular slope (b) e intercept (a)</span>
+<span id="cb14-42"><a href=""></a>numerator = np.sum((x - x_mean) * (y - y_mean))</span>
+<span id="cb14-43"><a href=""></a>denominator = np.sum((x - x_mean) ** 2)</span>
+<span id="cb14-44"><a href=""></a>slope = numerator / denominator</span>
+<span id="cb14-45"><a href=""></a>intercept = y_mean - slope * x_mean</span>
+<span id="cb14-46"><a href=""></a></span>
+<span id="cb14-47"><a href=""></a># R²</span>
+<span id="cb14-48"><a href=""></a>y_pred = slope * x + intercept</span>
+<span id="cb14-49"><a href=""></a>ss_res = np.sum((y - y_pred) ** 2)</span>
+<span id="cb14-50"><a href=""></a>ss_tot = np.sum((y - y_mean) ** 2)</span>
+<span id="cb14-51"><a href=""></a>r_squared = 1 - (ss_res / ss_tot)</span>
+<span id="cb14-52"><a href=""></a></span>
+<span id="cb14-53"><a href=""></a>print(f"📊 Slope: {slope:.2e}")</span>
+<span id="cb14-54"><a href=""></a>print(f"📊 Intercept: {intercept:.2f}")</span>
+<span id="cb14-55"><a href=""></a>print(f"📊 R²: {r_squared:.4f}\n")</span>
+<span id="cb14-56"><a href=""></a></span>
+<span id="cb14-57"><a href=""></a># GRÁFICO</span>
+<span id="cb14-58"><a href=""></a>fig, ax = plt.subplots(figsize=(10, 7), dpi=150)</span>
+<span id="cb14-59"><a href=""></a></span>
+<span id="cb14-60"><a href=""></a># Scatter</span>
+<span id="cb14-61"><a href=""></a>ax.scatter(x, y, alpha=0.6, color='steelblue', s=20, label='Dados')</span>
+<span id="cb14-62"><a href=""></a></span>
+<span id="cb14-63"><a href=""></a># Linha de regressão</span>
+<span id="cb14-64"><a href=""></a>x_line = np.linspace(x.min(), x.max(), 100)</span>
+<span id="cb14-65"><a href=""></a>y_line = slope * x_line + intercept</span>
+<span id="cb14-66"><a href=""></a>ax.plot(x_line, y_line, color='red', linewidth=3, label='Regressão')</span>
+<span id="cb14-67"><a href=""></a></span>
+<span id="cb14-68"><a href=""></a># Títulos</span>
+<span id="cb14-69"><a href=""></a>ax.set_title('Regressão Linear: Preço vs Volume (PYTHON)', </span>
+<span id="cb14-70"><a href=""></a>             fontsize=14, fontweight='bold')</span>
+<span id="cb14-71"><a href=""></a>ax.set_xlabel('Volume Negociado', fontsize=12)</span>
+<span id="cb14-72"><a href=""></a>ax.set_ylabel('Preço Fechamento (USD)', fontsize=12)</span>
+<span id="cb14-73"><a href=""></a>ax.grid(True, alpha=0.3, linestyle='--')</span>
+<span id="cb14-74"><a href=""></a>ax.legend()</span>
+<span id="cb14-75"><a href=""></a></span>
+<span id="cb14-76"><a href=""></a># Texto</span>
+<span id="cb14-77"><a href=""></a>text = f'y = {intercept:.2f} + {slope:.2e}×Volume\\nR² = {r_squared:.4f}'</span>
+<span id="cb14-78"><a href=""></a>ax.text(0.05, 0.95, text,</span>
+<span id="cb14-79"><a href=""></a>        transform=ax.transAxes,</span>
+<span id="cb14-80"><a href=""></a>        fontsize=11,</span>
+<span id="cb14-81"><a href=""></a>        verticalalignment='top',</span>
+<span id="cb14-82"><a href=""></a>        bbox=dict(boxstyle='round', facecolor='white', alpha=0.9),</span>
+<span id="cb14-83"><a href=""></a>        color='red',</span>
+<span id="cb14-84"><a href=""></a>        fontweight='bold')</span>
+<span id="cb14-85"><a href=""></a></span>
+<span id="cb14-86"><a href=""></a>plt.tight_layout()</span>
+<span id="cb14-87"><a href=""></a>plt.savefig('slide3_python_regression.png', dpi=150, bbox_inches='tight')</span>
+<span id="cb14-88"><a href=""></a>print("✅ slide3_python_regression.png")</span>
+<span id="cb14-89"><a href=""></a>plt.close()</span>
+<span id="cb14-90"><a href=""></a>"""</span>
+<span id="cb14-91"><a href=""></a></span>
+<span id="cb14-92"><a href=""></a>if isfile("slide3_python_regression.png")</span>
+<span id="cb14-93"><a href=""></a>    println("\n✅ SUCESSO!")</span>
+<span id="cb14-94"><a href=""></a>else</span>
+<span id="cb14-95"><a href=""></a>    println("\n❌ Falhou")</span>
+<span id="cb14-96"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="python---regressão-linear" class="slide level2">
+<h2>Python - Regressão Linear</h2>
+<center>
+<img src="slide3_python_regression.png" style="width: 80%;">
+</center>
+</section>
+<section id="r-regressão-linear" class="slide level2">
+<h2>📈 R: Regressão Linear</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb15-1"><a href=""></a>#| echo: true</span>
+<span id="cb15-2"><a href=""></a>#| output: true</span>
+<span id="cb15-3"><a href=""></a>#| eval: true</span>
+<span id="cb15-4"><a href=""></a></span>
+<span id="cb15-5"><a href=""></a>using RCall</span>
+<span id="cb15-6"><a href=""></a></span>
+<span id="cb15-7"><a href=""></a>println("📊 Executando R com apple_stock.csv...\n")</span>
+<span id="cb15-8"><a href=""></a></span>
+<span id="cb15-9"><a href=""></a>R"""</span>
+<span id="cb15-10"><a href=""></a>library(ggplot2)</span>
+<span id="cb15-11"><a href=""></a></span>
+<span id="cb15-12"><a href=""></a># Carregar arquivo apple_stock.csv</span>
+<span id="cb15-13"><a href=""></a>if (!file.exists('apple_stock.csv')) {</span>
+<span id="cb15-14"><a href=""></a>  stop("❌ Arquivo 'apple_stock.csv' não encontrado!")</span>
+<span id="cb15-15"><a href=""></a>}</span>
+<span id="cb15-16"><a href=""></a></span>
+<span id="cb15-17"><a href=""></a>df &lt;- read.csv('apple_stock.csv')</span>
+<span id="cb15-18"><a href=""></a>cat("✅ apple_stock.csv carregado\n")</span>
+<span id="cb15-19"><a href=""></a>cat("   Colunas:", paste(names(df), collapse=", "), "\n")</span>
+<span id="cb15-20"><a href=""></a>cat("   Linhas:", nrow(df), "\n")</span>
+<span id="cb15-21"><a href=""></a></span>
+<span id="cb15-22"><a href=""></a># Limpar dados</span>
+<span id="cb15-23"><a href=""></a>df &lt;- na.omit(df[, c('Close', 'Volume')])</span>
+<span id="cb15-24"><a href=""></a>df &lt;- df[df$Volume &gt; 0, ]</span>
+<span id="cb15-25"><a href=""></a>df &lt;- tail(df, 500)</span>
+<span id="cb15-26"><a href=""></a></span>
+<span id="cb15-27"><a href=""></a>cat("📈", nrow(df), "registros após limpeza\n")</span>
+<span id="cb15-28"><a href=""></a>cat("   Volume:", format(min(df$Volume), scientific=FALSE), "-", </span>
+<span id="cb15-29"><a href=""></a>    format(max(df$Volume), scientific=FALSE), "\n")</span>
+<span id="cb15-30"><a href=""></a>cat("   Close:", round(min(df$Close), 2), "-", round(max(df$Close), 2), "\n\n")</span>
+<span id="cb15-31"><a href=""></a></span>
+<span id="cb15-32"><a href=""></a># Calcular regressão</span>
+<span id="cb15-33"><a href=""></a>model &lt;- lm(Close ~ Volume, data=df)</span>
+<span id="cb15-34"><a href=""></a>r2 &lt;- summary(model)$r.squared</span>
+<span id="cb15-35"><a href=""></a>coefs &lt;- coef(model)</span>
+<span id="cb15-36"><a href=""></a></span>
+<span id="cb15-37"><a href=""></a>cat("📊 Slope:", format(coefs[2], scientific=TRUE), "\n")</span>
+<span id="cb15-38"><a href=""></a>cat("📊 Intercept:", round(coefs[1], 2), "\n")</span>
+<span id="cb15-39"><a href=""></a>cat("📊 R²:", round(r2, 4), "\n\n")</span>
+<span id="cb15-40"><a href=""></a></span>
+<span id="cb15-41"><a href=""></a># CRIAR GRÁFICO</span>
+<span id="cb15-42"><a href=""></a>p &lt;- ggplot(df, aes(x=Volume, y=Close)) +</span>
+<span id="cb15-43"><a href=""></a>  geom_point(alpha=0.6, color='steelblue', size=2) +</span>
+<span id="cb15-44"><a href=""></a>  geom_smooth(method='lm', color='red', linewidth=1.5, </span>
+<span id="cb15-45"><a href=""></a>              se=TRUE, fill='pink', alpha=0.2) +</span>
+<span id="cb15-46"><a href=""></a>  labs(</span>
+<span id="cb15-47"><a href=""></a>    title='Regressão Linear: Preço vs Volume (R)',</span>
+<span id="cb15-48"><a href=""></a>    x='Volume Negociado',</span>
+<span id="cb15-49"><a href=""></a>    y='Preço Fechamento (USD)'</span>
+<span id="cb15-50"><a href=""></a>  ) +</span>
+<span id="cb15-51"><a href=""></a>  annotate('text', </span>
+<span id="cb15-52"><a href=""></a>           x=min(df$Volume) + (max(df$Volume) - min(df$Volume)) * 0.05,</span>
+<span id="cb15-53"><a href=""></a>           y=max(df$Close) * 0.95,</span>
+<span id="cb15-54"><a href=""></a>           label=paste0(</span>
+<span id="cb15-55"><a href=""></a>             'y = ', round(coefs[1], 2), ' + ',</span>
+<span id="cb15-56"><a href=""></a>             format(coefs[2], scientific=TRUE, digits=2), '×Volume\n',</span>
+<span id="cb15-57"><a href=""></a>             'R² = ', round(r2, 4)</span>
+<span id="cb15-58"><a href=""></a>           ),</span>
+<span id="cb15-59"><a href=""></a>           hjust=0, vjust=1,</span>
+<span id="cb15-60"><a href=""></a>           color='red', size=4, fontface='bold',</span>
+<span id="cb15-61"><a href=""></a>           fill='white', alpha=0.8) +</span>
+<span id="cb15-62"><a href=""></a>  theme_minimal() +</span>
+<span id="cb15-63"><a href=""></a>  theme(</span>
+<span id="cb15-64"><a href=""></a>    plot.title=element_text(size=14, face='bold'),</span>
+<span id="cb15-65"><a href=""></a>    axis.title=element_text(size=12),</span>
+<span id="cb15-66"><a href=""></a>    panel.grid.major=element_line(color='gray90'),</span>
+<span id="cb15-67"><a href=""></a>    panel.grid.minor=element_blank()</span>
+<span id="cb15-68"><a href=""></a>  )</span>
+<span id="cb15-69"><a href=""></a></span>
+<span id="cb15-70"><a href=""></a># Salvar</span>
+<span id="cb15-71"><a href=""></a>ggsave('slide3_r_regression.png', plot=p, </span>
+<span id="cb15-72"><a href=""></a>       width=10, height=7, dpi=150)</span>
+<span id="cb15-73"><a href=""></a></span>
+<span id="cb15-74"><a href=""></a>cat("✅ slide3_r_regression.png\n")</span>
+<span id="cb15-75"><a href=""></a>"""</span>
+<span id="cb15-76"><a href=""></a></span>
+<span id="cb15-77"><a href=""></a># Verificar</span>
+<span id="cb15-78"><a href=""></a>println("\n" * "="^60)</span>
+<span id="cb15-79"><a href=""></a>if isfile("slide3_r_regression.png")</span>
+<span id="cb15-80"><a href=""></a>    println("✅ SUCESSO! Gráfico R gerado")</span>
+<span id="cb15-81"><a href=""></a>    println("📂 slide3_r_regression.png")</span>
+<span id="cb15-82"><a href=""></a>else</span>
+<span id="cb15-83"><a href=""></a>    println("❌ Arquivo não criado")</span>
+<span id="cb15-84"><a href=""></a>    println("\n💡 Possíveis problemas:")</span>
+<span id="cb15-85"><a href=""></a>    println("   1. RCall não instalado: using Pkg; Pkg.add(\"RCall\")")</span>
+<span id="cb15-86"><a href=""></a>    println("   2. R não tem ggplot2: install.packages(\"ggplot2\")")</span>
+<span id="cb15-87"><a href=""></a>    println("   3. Erro de permissão de escrita")</span>
+<span id="cb15-88"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="r---regressão-linear" class="slide level2">
+<h2>R - Regressão Linear</h2>
+<center>
+<img src="slide3_r_regression.png" style="width: 80%;">
+</center>
+</section>
+<section id="slide-5-distribuições---histograma-vs-densidade" class="slide level2">
+<h2>📊 SLIDE 5: Distribuições - Histograma vs Densidade</h2>
+<p><strong>Dataset: Yahoo Stock Market Data - Kaggle</strong><br>
+<strong>Tipo de variável</strong>: 1 Quantitativa → Histograma + Densidade</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb16-1"><a href=""></a>#| echo: true</span>
+<span id="cb16-2"><a href=""></a>#| output: true</span>
+<span id="cb16-3"><a href=""></a>#| eval: true</span>
+<span id="cb16-4"><a href=""></a></span>
+<span id="cb16-5"><a href=""></a>#| echo: true</span>
+<span id="cb16-6"><a href=""></a>#| output: true</span>
+<span id="cb16-7"><a href=""></a></span>
+<span id="cb16-8"><a href=""></a>using CSV, DataFrames, Plots, Statistics, Distributions</span>
+<span id="cb16-9"><a href=""></a></span>
+<span id="cb16-10"><a href=""></a>println("📊 Carregando dados de ações...\n")</span>
+<span id="cb16-11"><a href=""></a></span>
+<span id="cb16-12"><a href=""></a># Função para calcular retornos</span>
+<span id="cb16-13"><a href=""></a>calc_returns(prices) = [0; diff(log.(prices)) .* 100]</span>
+<span id="cb16-14"><a href=""></a></span>
+<span id="cb16-15"><a href=""></a># Tickers para analisar</span>
+<span id="cb16-16"><a href=""></a>tickers = ["AAPL", "TSLA", "SPY"]</span>
+<span id="cb16-17"><a href=""></a></span>
+<span id="cb16-18"><a href=""></a># Dicionário para armazenar retornos</span>
+<span id="cb16-19"><a href=""></a>returns_dict = Dict{String, Vector{Float64}}()</span>
+<span id="cb16-20"><a href=""></a></span>
+<span id="cb16-21"><a href=""></a># Carregar cada ticker</span>
+<span id="cb16-22"><a href=""></a>for ticker in tickers</span>
+<span id="cb16-23"><a href=""></a>    # Tentar diferentes variações de nome</span>
+<span id="cb16-24"><a href=""></a>    possible_files = [</span>
+<span id="cb16-25"><a href=""></a>        "$(ticker).csv",</span>
+<span id="cb16-26"><a href=""></a>        "$(lowercase(ticker)).csv",</span>
+<span id="cb16-27"><a href=""></a>        "yahoo-stock-market-data/$(ticker).csv",</span>
+<span id="cb16-28"><a href=""></a>        "stocks_data/$(ticker).csv"</span>
+<span id="cb16-29"><a href=""></a>    ]</span>
+<span id="cb16-30"><a href=""></a>    </span>
+<span id="cb16-31"><a href=""></a>    found = false</span>
+<span id="cb16-32"><a href=""></a>    for filepath in possible_files</span>
+<span id="cb16-33"><a href=""></a>        if isfile(filepath)</span>
+<span id="cb16-34"><a href=""></a>            try</span>
+<span id="cb16-35"><a href=""></a>                df = CSV.read(filepath, DataFrame)</span>
+<span id="cb16-36"><a href=""></a>                </span>
+<span id="cb16-37"><a href=""></a>                # Calcular retornos</span>
+<span id="cb16-38"><a href=""></a>                returns = calc_returns(df.Close)[2:end]</span>
+<span id="cb16-39"><a href=""></a>                returns_dict[ticker] = returns</span>
+<span id="cb16-40"><a href=""></a>                </span>
+<span id="cb16-41"><a href=""></a>                println("✅ $ticker: $(length(returns)) retornos")</span>
+<span id="cb16-42"><a href=""></a>                found = true</span>
+<span id="cb16-43"><a href=""></a>                break</span>
+<span id="cb16-44"><a href=""></a>            catch e</span>
+<span id="cb16-45"><a href=""></a>                println("⚠️  Erro ao processar $filepath: $e")</span>
+<span id="cb16-46"><a href=""></a>            end</span>
+<span id="cb16-47"><a href=""></a>        end</span>
+<span id="cb16-48"><a href=""></a>    end</span>
+<span id="cb16-49"><a href=""></a>    </span>
+<span id="cb16-50"><a href=""></a>    if !found</span>
+<span id="cb16-51"><a href=""></a>        println("❌ Não encontrado: $ticker")</span>
+<span id="cb16-52"><a href=""></a>    end</span>
+<span id="cb16-53"><a href=""></a>end</span>
+<span id="cb16-54"><a href=""></a></span>
+<span id="cb16-55"><a href=""></a>println("\n📈 Total carregado: $(length(returns_dict)) ações\n")</span>
+<span id="cb16-56"><a href=""></a></span>
+<span id="cb16-57"><a href=""></a># Criar plots individuais</span>
+<span id="cb16-58"><a href=""></a>plots_list = []</span>
+<span id="cb16-59"><a href=""></a></span>
+<span id="cb16-60"><a href=""></a>for ticker in tickers</span>
+<span id="cb16-61"><a href=""></a>    if haskey(returns_dict, ticker)</span>
+<span id="cb16-62"><a href=""></a>        returns = returns_dict[ticker]</span>
+<span id="cb16-63"><a href=""></a>        </span>
+<span id="cb16-64"><a href=""></a>        # Cor por ticker</span>
+<span id="cb16-65"><a href=""></a>        colors = Dict("AAPL" =&gt; :steelblue, "TSLA" =&gt; :purple, "SPY" =&gt; :coral)</span>
+<span id="cb16-66"><a href=""></a>        color = get(colors, ticker, :blue)</span>
+<span id="cb16-67"><a href=""></a>        </span>
+<span id="cb16-68"><a href=""></a>        p = histogram(returns, bins=50, normalize=:pdf,</span>
+<span id="cb16-69"><a href=""></a>            alpha=0.6, label="Histogram", </span>
+<span id="cb16-70"><a href=""></a>            title="$ticker - Retornos Diários",</span>
+<span id="cb16-71"><a href=""></a>            xlabel="Retorno (%)", ylabel="Densidade",</span>
+<span id="cb16-72"><a href=""></a>            color=color, </span>
+<span id="cb16-73"><a href=""></a>            legend=:topright)</span>
+<span id="cb16-74"><a href=""></a>        </span>
+<span id="cb16-75"><a href=""></a>        # KDE</span>
+<span id="cb16-76"><a href=""></a>        density!(p, returns, linewidth=3, label="KDE", color=:red)</span>
+<span id="cb16-77"><a href=""></a>        </span>
+<span id="cb16-78"><a href=""></a>        # Normal teórica</span>
+<span id="cb16-79"><a href=""></a>        plot!(p, Normal(mean(returns), std(returns)),</span>
+<span id="cb16-80"><a href=""></a>            linewidth=2, label="Normal Teórica", </span>
+<span id="cb16-81"><a href=""></a>            linestyle=:dash, color=:black)</span>
+<span id="cb16-82"><a href=""></a>        </span>
+<span id="cb16-83"><a href=""></a>        # Estatísticas</span>
+<span id="cb16-84"><a href=""></a>        annotate!(p, minimum(returns) * 0.8, maximum(returns) * 0.8,</span>
+<span id="cb16-85"><a href=""></a>            text("μ = $(round(mean(returns), digits=3))%\nσ = $(round(std(returns), digits=3))%",</span>
+<span id="cb16-86"><a href=""></a>                 :left, 9, :darkgray))</span>
+<span id="cb16-87"><a href=""></a>        </span>
+<span id="cb16-88"><a href=""></a>        push!(plots_list, p)</span>
+<span id="cb16-89"><a href=""></a>    else</span>
+<span id="cb16-90"><a href=""></a>        # Plot vazio se não encontrou</span>
+<span id="cb16-91"><a href=""></a>        p = plot(title="$ticker\n(Não disponível)", </span>
+<span id="cb16-92"><a href=""></a>                legend=false, grid=false, showaxis=false)</span>
+<span id="cb16-93"><a href=""></a>        push!(plots_list, p)</span>
+<span id="cb16-94"><a href=""></a>    end</span>
+<span id="cb16-95"><a href=""></a>end</span>
+<span id="cb16-96"><a href=""></a></span>
+<span id="cb16-97"><a href=""></a># Combinar plots</span>
+<span id="cb16-98"><a href=""></a>if length(plots_list) &gt;= 3</span>
+<span id="cb16-99"><a href=""></a>    p_final = plot(plots_list[1], plots_list[2], plots_list[3],</span>
+<span id="cb16-100"><a href=""></a>        layout=(1, 3), size=(1500, 500))</span>
+<span id="cb16-101"><a href=""></a>else</span>
+<span id="cb16-102"><a href=""></a>    p_final = plot(plots_list..., layout=(1, length(plots_list)))</span>
+<span id="cb16-103"><a href=""></a>end</span>
+<span id="cb16-104"><a href=""></a></span>
+<span id="cb16-105"><a href=""></a># Salvar</span>
+<span id="cb16-106"><a href=""></a>savefig(p_final, "distributions_returns.png")</span>
+<span id="cb16-107"><a href=""></a>println("✅ Gráfico salvo: distributions_returns.png")</span>
+<span id="cb16-108"><a href=""></a></span>
+<span id="cb16-109"><a href=""></a># Mostrar</span>
+<span id="cb16-110"><a href=""></a>display(p_final)</span>
+<span id="cb16-111"><a href=""></a></span>
+<span id="cb16-112"><a href=""></a># Estatísticas resumo</span>
+<span id="cb16-113"><a href=""></a>println("\n" * "="^60)</span>
+<span id="cb16-114"><a href=""></a>println("ESTATÍSTICAS DE RETORNOS")</span>
+<span id="cb16-115"><a href=""></a>println("="^60)</span>
+<span id="cb16-116"><a href=""></a>for ticker in tickers</span>
+<span id="cb16-117"><a href=""></a>    if haskey(returns_dict, ticker)</span>
+<span id="cb16-118"><a href=""></a>        r = returns_dict[ticker]</span>
+<span id="cb16-119"><a href=""></a>        println("$ticker:")</span>
+<span id="cb16-120"><a href=""></a>        println("  Média: $(round(mean(r), digits=4))%")</span>
+<span id="cb16-121"><a href=""></a>        println("  Std:   $(round(std(r), digits=4))%")</span>
+<span id="cb16-122"><a href=""></a>        println("  Min:   $(round(minimum(r), digits=2))%")</span>
+<span id="cb16-123"><a href=""></a>        println("  Max:   $(round(maximum(r), digits=2))%")</span>
+<span id="cb16-124"><a href=""></a>        println()</span>
+<span id="cb16-125"><a href=""></a>    end</span>
+<span id="cb16-126"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="gráfico-de-estatística-de-retornos" class="slide level2">
+<h2>Gráfico de Estatística de Retornos</h2>
+<center>
+<img src="distributions_returns.png" style="width: 200%;">
+</center>
+</section>
+<section id="comparação-aapl-tsla-spy" class="slide level2">
+<h2>📊 Comparação: AAPL, TSLA, SPY</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb17-1"><a href=""></a>#| echo: true</span>
+<span id="cb17-2"><a href=""></a>#| output: true</span>
+<span id="cb17-3"><a href=""></a>#| eval: true</span>
+<span id="cb17-4"><a href=""></a></span>
+<span id="cb17-5"><a href=""></a>using StatsPlots, Distributions</span>
+<span id="cb17-6"><a href=""></a></span>
+<span id="cb17-7"><a href=""></a>println("📊 Criando distribuições de retornos...\n")</span>
+<span id="cb17-8"><a href=""></a></span>
+<span id="cb17-9"><a href=""></a># Verificar quais dados foram carregados</span>
+<span id="cb17-10"><a href=""></a>if !@isdefined(returns_dict)</span>
+<span id="cb17-11"><a href=""></a>    println("⚠️  Carregando dados primeiro...")</span>
+<span id="cb17-12"><a href=""></a>    </span>
+<span id="cb17-13"><a href=""></a>    # Carregar dados</span>
+<span id="cb17-14"><a href=""></a>    tickers = ["AAPL", "TSLA", "SPY"]</span>
+<span id="cb17-15"><a href=""></a>    returns_dict = Dict{String, Vector{Float64}}()</span>
+<span id="cb17-16"><a href=""></a>    </span>
+<span id="cb17-17"><a href=""></a>    for ticker in tickers</span>
+<span id="cb17-18"><a href=""></a>        possible_files = [</span>
+<span id="cb17-19"><a href=""></a>            "$(ticker).csv",</span>
+<span id="cb17-20"><a href=""></a>            "$(lowercase(ticker)).csv",</span>
+<span id="cb17-21"><a href=""></a>            "yahoo-stock-market-data/$(ticker).csv"</span>
+<span id="cb17-22"><a href=""></a>        ]</span>
+<span id="cb17-23"><a href=""></a>        </span>
+<span id="cb17-24"><a href=""></a>        for filepath in possible_files</span>
+<span id="cb17-25"><a href=""></a>            if isfile(filepath)</span>
+<span id="cb17-26"><a href=""></a>                try</span>
+<span id="cb17-27"><a href=""></a>                    df = CSV.read(filepath, DataFrame)</span>
+<span id="cb17-28"><a href=""></a>                    returns = calc_returns(df.Close)[2:end]</span>
+<span id="cb17-29"><a href=""></a>                    returns_dict[ticker] = returns</span>
+<span id="cb17-30"><a href=""></a>                    println("✅ $ticker")</span>
+<span id="cb17-31"><a href=""></a>                    break</span>
+<span id="cb17-32"><a href=""></a>                catch; end</span>
+<span id="cb17-33"><a href=""></a>            end</span>
+<span id="cb17-34"><a href=""></a>        end</span>
+<span id="cb17-35"><a href=""></a>    end</span>
+<span id="cb17-36"><a href=""></a>end</span>
+<span id="cb17-37"><a href=""></a></span>
+<span id="cb17-38"><a href=""></a># Função helper para criar plot seguro</span>
+<span id="cb17-39"><a href=""></a>function create_distribution_plot(returns_dict, ticker, color=:steelblue)</span>
+<span id="cb17-40"><a href=""></a>    if haskey(returns_dict, ticker)</span>
+<span id="cb17-41"><a href=""></a>        returns = returns_dict[ticker]</span>
+<span id="cb17-42"><a href=""></a>        </span>
+<span id="cb17-43"><a href=""></a>        p = histogram(returns, bins=50, normalize=:pdf,</span>
+<span id="cb17-44"><a href=""></a>            alpha=0.6, </span>
+<span id="cb17-45"><a href=""></a>            title="$ticker - Retornos Diários",</span>
+<span id="cb17-46"><a href=""></a>            xlabel="Retorno (%)", </span>
+<span id="cb17-47"><a href=""></a>            ylabel="Densidade", </span>
+<span id="cb17-48"><a href=""></a>            legend=:topright,</span>
+<span id="cb17-49"><a href=""></a>            color=color,</span>
+<span id="cb17-50"><a href=""></a>            label="Histogram")</span>
+<span id="cb17-51"><a href=""></a>        </span>
+<span id="cb17-52"><a href=""></a>        density!(p, returns, linewidth=3, label="KDE", color=:red)</span>
+<span id="cb17-53"><a href=""></a>        </span>
+<span id="cb17-54"><a href=""></a>        plot!(p, Normal(mean(returns), std(returns)),</span>
+<span id="cb17-55"><a href=""></a>            linewidth=2, label="Normal Teórica", </span>
+<span id="cb17-56"><a href=""></a>            linestyle=:dash, color=:black)</span>
+<span id="cb17-57"><a href=""></a>        </span>
+<span id="cb17-58"><a href=""></a>        return p</span>
+<span id="cb17-59"><a href=""></a>    else</span>
+<span id="cb17-60"><a href=""></a>        # Plot vazio se não existir</span>
+<span id="cb17-61"><a href=""></a>        return plot(title="$ticker\n(Dados não disponíveis)", </span>
+<span id="cb17-62"><a href=""></a>                   legend=false, grid=false, showaxis=false)</span>
+<span id="cb17-63"><a href=""></a>    end</span>
+<span id="cb17-64"><a href=""></a>end</span>
+<span id="cb17-65"><a href=""></a></span>
+<span id="cb17-66"><a href=""></a># Criar os 3 plots</span>
+<span id="cb17-67"><a href=""></a>p1 = create_distribution_plot(returns_dict, "AAPL", :steelblue)</span>
+<span id="cb17-68"><a href=""></a>p2 = create_distribution_plot(returns_dict, "TSLA", :purple)</span>
+<span id="cb17-69"><a href=""></a>p3 = create_distribution_plot(returns_dict, "SPY", :coral)</span>
+<span id="cb17-70"><a href=""></a></span>
+<span id="cb17-71"><a href=""></a># Combinar em layout 1x3</span>
+<span id="cb17-72"><a href=""></a>p_final = plot(p1, p2, p3, layout=(1,3), size=(1500, 500))</span>
+<span id="cb17-73"><a href=""></a></span>
+<span id="cb17-74"><a href=""></a># Salvar</span>
+<span id="cb17-75"><a href=""></a>savefig(p_final, "distributions_3stocks.png")</span>
+<span id="cb17-76"><a href=""></a>println("\n✅ Gráfico salvo: distributions_3stocks.png")</span>
+<span id="cb17-77"><a href=""></a></span>
+<span id="cb17-78"><a href=""></a># Mostrar</span>
+<span id="cb17-79"><a href=""></a>display(p_final)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comparação-aapl-tsla-spy-1" class="slide level2">
+<h2>📊 Comparação: AAPL, TSLA, SPY</h2>
+<center>
+<img src="distributions_3stocks.png" style="width: 100%;">
+</center>
+</section>
+<section id="python-distribuições" class="slide level2">
+<h2>🐍 Python: Distribuições</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb18-1"><a href=""></a></span>
+<span id="cb18-2"><a href=""></a>#| echo: true</span>
+<span id="cb18-3"><a href=""></a>#| output: true</span>
+<span id="cb18-4"><a href=""></a>#| eval: true</span>
+<span id="cb18-5"><a href=""></a></span>
+<span id="cb18-6"><a href=""></a>using PyCall</span>
+<span id="cb18-7"><a href=""></a></span>
+<span id="cb18-8"><a href=""></a>println("🐍 Distribuições Python (SEM scipy)...\n")</span>
+<span id="cb18-9"><a href=""></a></span>
+<span id="cb18-10"><a href=""></a>py"""</span>
+<span id="cb18-11"><a href=""></a>import pandas as pd</span>
+<span id="cb18-12"><a href=""></a>import numpy as np</span>
+<span id="cb18-13"><a href=""></a>import matplotlib</span>
+<span id="cb18-14"><a href=""></a>matplotlib.use('Agg')</span>
+<span id="cb18-15"><a href=""></a>import matplotlib.pyplot as plt</span>
+<span id="cb18-16"><a href=""></a>import os</span>
+<span id="cb18-17"><a href=""></a></span>
+<span id="cb18-18"><a href=""></a># Função KDE manual (sem scipy)</span>
+<span id="cb18-19"><a href=""></a>def kde_manual(data, bandwidth=None):</span>
+<span id="cb18-20"><a href=""></a>    if bandwidth is None:</span>
+<span id="cb18-21"><a href=""></a>        # Regra de Silverman</span>
+<span id="cb18-22"><a href=""></a>        bandwidth = 1.06 * np.std(data) * len(data)**(-1/5)</span>
+<span id="cb18-23"><a href=""></a>    </span>
+<span id="cb18-24"><a href=""></a>    x_range = np.linspace(data.min(), data.max(), 100)</span>
+<span id="cb18-25"><a href=""></a>    kde_values = np.zeros_like(x_range)</span>
+<span id="cb18-26"><a href=""></a>    </span>
+<span id="cb18-27"><a href=""></a>    for xi in x_range:</span>
+<span id="cb18-28"><a href=""></a>        kernel = np.exp(-0.5 * ((data - xi) / bandwidth)**2)</span>
+<span id="cb18-29"><a href=""></a>        kde_values[np.where(x_range == xi)] = kernel.sum() / (len(data) * bandwidth * np.sqrt(2 * np.pi))</span>
+<span id="cb18-30"><a href=""></a>    </span>
+<span id="cb18-31"><a href=""></a>    return x_range, kde_values</span>
+<span id="cb18-32"><a href=""></a></span>
+<span id="cb18-33"><a href=""></a># Função normal PDF manual (sem scipy)</span>
+<span id="cb18-34"><a href=""></a>def normal_pdf(x, mu, sigma):</span>
+<span id="cb18-35"><a href=""></a>    return (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma)**2)</span>
+<span id="cb18-36"><a href=""></a></span>
+<span id="cb18-37"><a href=""></a># Tickers para carregar</span>
+<span id="cb18-38"><a href=""></a>tickers = ['AAPL', 'TSLA', 'SPY']</span>
+<span id="cb18-39"><a href=""></a>returns_data = {}</span>
+<span id="cb18-40"><a href=""></a></span>
+<span id="cb18-41"><a href=""></a>print("📊 Carregando dados...\n")</span>
+<span id="cb18-42"><a href=""></a></span>
+<span id="cb18-43"><a href=""></a># Carregar cada ticker</span>
+<span id="cb18-44"><a href=""></a>for ticker in tickers:</span>
+<span id="cb18-45"><a href=""></a>    possible_files = [</span>
+<span id="cb18-46"><a href=""></a>        f'{ticker}.csv',</span>
+<span id="cb18-47"><a href=""></a>        f'{ticker.lower()}.csv',</span>
+<span id="cb18-48"><a href=""></a>        f'yahoo-stock-market-data/{ticker}.csv',</span>
+<span id="cb18-49"><a href=""></a>        f'stocks_data/{ticker}.csv'</span>
+<span id="cb18-50"><a href=""></a>    ]</span>
+<span id="cb18-51"><a href=""></a>    </span>
+<span id="cb18-52"><a href=""></a>    found = False</span>
+<span id="cb18-53"><a href=""></a>    for filepath in possible_files:</span>
+<span id="cb18-54"><a href=""></a>        if os.path.exists(filepath):</span>
+<span id="cb18-55"><a href=""></a>            try:</span>
+<span id="cb18-56"><a href=""></a>                df = pd.read_csv(filepath)</span>
+<span id="cb18-57"><a href=""></a>                returns = np.diff(np.log(df['Close'])) * 100</span>
+<span id="cb18-58"><a href=""></a>                returns_data[ticker] = returns</span>
+<span id="cb18-59"><a href=""></a>                print(f"✅ {ticker}: {len(returns)} retornos")</span>
+<span id="cb18-60"><a href=""></a>                found = True</span>
+<span id="cb18-61"><a href=""></a>                break</span>
+<span id="cb18-62"><a href=""></a>            except Exception as e:</span>
+<span id="cb18-63"><a href=""></a>                print(f"⚠️  Erro: {e}")</span>
+<span id="cb18-64"><a href=""></a>    </span>
+<span id="cb18-65"><a href=""></a>    if not found:</span>
+<span id="cb18-66"><a href=""></a>        print(f"❌ Não encontrado: {ticker}")</span>
+<span id="cb18-67"><a href=""></a></span>
+<span id="cb18-68"><a href=""></a>print(f"\n📈 Total: {len(returns_data)} ações\n")</span>
+<span id="cb18-69"><a href=""></a></span>
+<span id="cb18-70"><a href=""></a># Criar figura</span>
+<span id="cb18-71"><a href=""></a>fig, axes = plt.subplots(1, 3, figsize=(15, 5), dpi=150)</span>
+<span id="cb18-72"><a href=""></a></span>
+<span id="cb18-73"><a href=""></a># Cores</span>
+<span id="cb18-74"><a href=""></a>colors = {'AAPL': 'steelblue', 'TSLA': 'purple', 'SPY': 'coral'}</span>
+<span id="cb18-75"><a href=""></a></span>
+<span id="cb18-76"><a href=""></a>for idx, ticker in enumerate(tickers):</span>
+<span id="cb18-77"><a href=""></a>    ax = axes[idx]</span>
+<span id="cb18-78"><a href=""></a>    </span>
+<span id="cb18-79"><a href=""></a>    if ticker in returns_data:</span>
+<span id="cb18-80"><a href=""></a>        returns = returns_data[ticker]</span>
+<span id="cb18-81"><a href=""></a>        color = colors.get(ticker, 'steelblue')</span>
+<span id="cb18-82"><a href=""></a>        </span>
+<span id="cb18-83"><a href=""></a>        # Histograma</span>
+<span id="cb18-84"><a href=""></a>        ax.hist(returns, bins=50, density=True, alpha=0.6, </span>
+<span id="cb18-85"><a href=""></a>                label='Histogram', color=color)</span>
+<span id="cb18-86"><a href=""></a>        </span>
+<span id="cb18-87"><a href=""></a>        # KDE manual</span>
+<span id="cb18-88"><a href=""></a>        x_kde, y_kde = kde_manual(returns)</span>
+<span id="cb18-89"><a href=""></a>        ax.plot(x_kde, y_kde, 'r-', linewidth=3, label='KDE')</span>
+<span id="cb18-90"><a href=""></a>        </span>
+<span id="cb18-91"><a href=""></a>        # Normal teórica manual</span>
+<span id="cb18-92"><a href=""></a>        mu, sigma = returns.mean(), returns.std()</span>
+<span id="cb18-93"><a href=""></a>        x_norm = np.linspace(returns.min(), returns.max(), 100)</span>
+<span id="cb18-94"><a href=""></a>        y_norm = normal_pdf(x_norm, mu, sigma)</span>
+<span id="cb18-95"><a href=""></a>        ax.plot(x_norm, y_norm, 'k--', linewidth=2, label='Normal Teórica')</span>
+<span id="cb18-96"><a href=""></a>        </span>
+<span id="cb18-97"><a href=""></a>        ax.set_title(f'{ticker} - Retornos Diários', </span>
+<span id="cb18-98"><a href=""></a>                     fontsize=14, fontweight='bold')</span>
+<span id="cb18-99"><a href=""></a>        ax.set_xlabel('Retorno (%)', fontsize=12)</span>
+<span id="cb18-100"><a href=""></a>        ax.set_ylabel('Densidade', fontsize=12)</span>
+<span id="cb18-101"><a href=""></a>        ax.legend(loc='best')</span>
+<span id="cb18-102"><a href=""></a>        ax.grid(True, alpha=0.3, linestyle='--')</span>
+<span id="cb18-103"><a href=""></a>        </span>
+<span id="cb18-104"><a href=""></a>        # Estatísticas</span>
+<span id="cb18-105"><a href=""></a>        stats_text = f'μ = {mu:.3f}%\\nσ = {sigma:.3f}%'</span>
+<span id="cb18-106"><a href=""></a>        ax.text(0.05, 0.95, stats_text,</span>
+<span id="cb18-107"><a href=""></a>                transform=ax.transAxes,</span>
+<span id="cb18-108"><a href=""></a>                fontsize=9,</span>
+<span id="cb18-109"><a href=""></a>                verticalalignment='top',</span>
+<span id="cb18-110"><a href=""></a>                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))</span>
+<span id="cb18-111"><a href=""></a>    else:</span>
+<span id="cb18-112"><a href=""></a>        ax.text(0.5, 0.5, f'{ticker}\\n(Não disponível)',</span>
+<span id="cb18-113"><a href=""></a>                ha='center', va='center', fontsize=12)</span>
+<span id="cb18-114"><a href=""></a>        ax.set_title(f'{ticker}', fontsize=14)</span>
+<span id="cb18-115"><a href=""></a>        ax.axis('off')</span>
+<span id="cb18-116"><a href=""></a></span>
+<span id="cb18-117"><a href=""></a>plt.tight_layout()</span>
+<span id="cb18-118"><a href=""></a>plt.savefig('slide5_python_distributions.png', dpi=150, bbox_inches='tight')</span>
+<span id="cb18-119"><a href=""></a>print("✅ slide5_python_distributions.png")</span>
+<span id="cb18-120"><a href=""></a>plt.close()</span>
+<span id="cb18-121"><a href=""></a>"""</span>
+<span id="cb18-122"><a href=""></a></span>
+<span id="cb18-123"><a href=""></a>if isfile("slide5_python_distributions.png")</span>
+<span id="cb18-124"><a href=""></a>    println("\n✅ SUCESSO!")</span>
+<span id="cb18-125"><a href=""></a>else</span>
+<span id="cb18-126"><a href=""></a>    println("\n❌ Falhou")</span>
+<span id="cb18-127"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="python-distribuições-1" class="slide level2">
+<h2>Python: Distribuições</h2>
+<center>
+<img src="slide5_python_distributions.png" style="width: 100%;">
+</center>
+</section>
+<section id="r-distribuições" class="slide level2">
+<h2>📈 R: Distribuições</h2>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb19-1"><a href=""></a>#| echo: true</span>
+<span id="cb19-2"><a href=""></a>#| output: true</span>
+<span id="cb19-3"><a href=""></a>#| eval: true</span>
+<span id="cb19-4"><a href=""></a></span>
+<span id="cb19-5"><a href=""></a>using RCall</span>
+<span id="cb19-6"><a href=""></a></span>
+<span id="cb19-7"><a href=""></a>println("📊 Distribuições R...\n")</span>
+<span id="cb19-8"><a href=""></a></span>
+<span id="cb19-9"><a href=""></a>r_dist = raw"""</span>
+<span id="cb19-10"><a href=""></a>library(ggplot2)</span>
+<span id="cb19-11"><a href=""></a>library(patchwork)</span>
+<span id="cb19-12"><a href=""></a></span>
+<span id="cb19-13"><a href=""></a>aapl &lt;- read.csv('AAPL.csv')</span>
+<span id="cb19-14"><a href=""></a>tsla &lt;- read.csv('TSLA.csv')</span>
+<span id="cb19-15"><a href=""></a>spy &lt;- read.csv('SPY.csv')</span>
+<span id="cb19-16"><a href=""></a></span>
+<span id="cb19-17"><a href=""></a>returns_aapl &lt;- diff(log(aapl$Close)) * 100</span>
+<span id="cb19-18"><a href=""></a>returns_tsla &lt;- diff(log(tsla$Close)) * 100</span>
+<span id="cb19-19"><a href=""></a>returns_spy &lt;- diff(log(spy$Close)) * 100</span>
+<span id="cb19-20"><a href=""></a></span>
+<span id="cb19-21"><a href=""></a>df_returns &lt;- data.frame(</span>
+<span id="cb19-22"><a href=""></a>  Return = c(returns_aapl, returns_tsla, returns_spy),</span>
+<span id="cb19-23"><a href=""></a>  Asset = c(rep('AAPL', length(returns_aapl)),</span>
+<span id="cb19-24"><a href=""></a>            rep('TSLA', length(returns_tsla)),</span>
+<span id="cb19-25"><a href=""></a>            rep('SPY', length(returns_spy)))</span>
+<span id="cb19-26"><a href=""></a>)</span>
+<span id="cb19-27"><a href=""></a></span>
+<span id="cb19-28"><a href=""></a>ggplot(df_returns, aes(x = Return, fill = Asset)) +</span>
+<span id="cb19-29"><a href=""></a>  geom_histogram(aes(y = ..density..), bins = 50, alpha = 0.6) +</span>
+<span id="cb19-30"><a href=""></a>  geom_density(aes(color = Asset), linewidth = 1.5) +</span>
+<span id="cb19-31"><a href=""></a>  facet_wrap(~Asset, scales = 'free') +</span>
+<span id="cb19-32"><a href=""></a>  labs(title = 'Distribuição de Retornos',</span>
+<span id="cb19-33"><a href=""></a>       x = 'Retorno (%)',</span>
+<span id="cb19-34"><a href=""></a>       y = 'Densidade') +</span>
+<span id="cb19-35"><a href=""></a>  theme_minimal() +</span>
+<span id="cb19-36"><a href=""></a>  theme(plot.title = element_text(size = 14),</span>
+<span id="cb19-37"><a href=""></a>        axis.title = element_text(size = 12))</span>
+<span id="cb19-38"><a href=""></a></span>
+<span id="cb19-39"><a href=""></a>ggsave('slide5_r_distributions.png', width = 15, height = 5, dpi = 300)</span>
+<span id="cb19-40"><a href=""></a>"""</span>
+<span id="cb19-41"><a href=""></a></span>
+<span id="cb19-42"><a href=""></a>println(r_dist)</span>
+<span id="cb19-43"><a href=""></a></span>
+<span id="cb19-44"><a href=""></a># Executar o código R</span>
+<span id="cb19-45"><a href=""></a>R"""</span>
+<span id="cb19-46"><a href=""></a>library(ggplot2)</span>
+<span id="cb19-47"><a href=""></a>library(patchwork)</span>
+<span id="cb19-48"><a href=""></a></span>
+<span id="cb19-49"><a href=""></a>aapl &lt;- read.csv('AAPL.csv')</span>
+<span id="cb19-50"><a href=""></a>tsla &lt;- read.csv('TSLA.csv')</span>
+<span id="cb19-51"><a href=""></a>spy &lt;- read.csv('SPY.csv')</span>
+<span id="cb19-52"><a href=""></a></span>
+<span id="cb19-53"><a href=""></a>returns_aapl &lt;- diff(log(aapl$Close)) * 100</span>
+<span id="cb19-54"><a href=""></a>returns_tsla &lt;- diff(log(tsla$Close)) * 100</span>
+<span id="cb19-55"><a href=""></a>returns_spy &lt;- diff(log(spy$Close)) * 100</span>
+<span id="cb19-56"><a href=""></a></span>
+<span id="cb19-57"><a href=""></a>df_returns &lt;- data.frame(</span>
+<span id="cb19-58"><a href=""></a>  Return = c(returns_aapl, returns_tsla, returns_spy),</span>
+<span id="cb19-59"><a href=""></a>  Asset = c(rep('AAPL', length(returns_aapl)),</span>
+<span id="cb19-60"><a href=""></a>            rep('TSLA', length(returns_tsla)),</span>
+<span id="cb19-61"><a href=""></a>            rep('SPY', length(returns_spy)))</span>
+<span id="cb19-62"><a href=""></a>)</span>
+<span id="cb19-63"><a href=""></a></span>
+<span id="cb19-64"><a href=""></a>ggplot(df_returns, aes(x = Return, fill = Asset)) +</span>
+<span id="cb19-65"><a href=""></a>  geom_histogram(aes(y = ..density..), bins = 50, alpha = 0.6) +</span>
+<span id="cb19-66"><a href=""></a>  geom_density(aes(color = Asset), linewidth = 1.5) +</span>
+<span id="cb19-67"><a href=""></a>  facet_wrap(~Asset, scales = 'free') +</span>
+<span id="cb19-68"><a href=""></a>  labs(title = 'Distribuição de Retornos',</span>
+<span id="cb19-69"><a href=""></a>       x = 'Retorno (%)',</span>
+<span id="cb19-70"><a href=""></a>       y = 'Densidade') +</span>
+<span id="cb19-71"><a href=""></a>  theme_minimal() +</span>
+<span id="cb19-72"><a href=""></a>  theme(plot.title = element_text(size = 14),</span>
+<span id="cb19-73"><a href=""></a>        axis.title = element_text(size = 12))</span>
+<span id="cb19-74"><a href=""></a></span>
+<span id="cb19-75"><a href=""></a>ggsave('slide5_r_distributions.png', width = 15, height = 5, dpi = 300)</span>
+<span id="cb19-76"><a href=""></a>"""</span>
+<span id="cb19-77"><a href=""></a></span>
+<span id="cb19-78"><a href=""></a>if isfile("slide5_r_distributions.png")</span>
+<span id="cb19-79"><a href=""></a>    println("✅ SUCESSO!")</span>
+<span id="cb19-80"><a href=""></a>else</span>
+<span id="cb19-81"><a href=""></a>    println("❌ Falhou")</span>
+<span id="cb19-82"><a href=""></a>end</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="r-distribuições-1" class="slide level2">
+<h2>R: Distribuições</h2>
+<center>
+<img src="slide5_r_distributions.png" style="width: 100%;">
+</center>
+</section>
+<section id="estatísticas-descritivas" class="slide level2">
+<h2>📊 Estatísticas Descritivas</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb20-1"><a href=""></a>#| echo: true</span>
+<span id="cb20-2"><a href=""></a>#| output: true</span>
+<span id="cb20-3"><a href=""></a></span>
+<span id="cb20-4"><a href=""></a>using StatsBase</span>
+<span id="cb20-5"><a href=""></a></span>
+<span id="cb20-6"><a href=""></a>println("=== Estatísticas de Retornos ===\n")</span>
+<span id="cb20-7"><a href=""></a>println("AAPL:")</span>
+<span id="cb20-8"><a href=""></a>println("  Média: $(round(mean(returns_aapl), digits=3))%")</span>
+<span id="cb20-9"><a href=""></a>println("  Std: $(round(std(returns_aapl), digits=3))%")</span>
+<span id="cb20-10"><a href=""></a>println("  Assimetria: $(round(skewness(returns_aapl), digits=3))")</span>
+<span id="cb20-11"><a href=""></a>println("  Curtose: $(round(kurtosis(returns_aapl), digits=3))")</span>
+<span id="cb20-12"><a href=""></a></span>
+<span id="cb20-13"><a href=""></a>println("\nTSLA:")</span>
+<span id="cb20-14"><a href=""></a>println("  Média: $(round(mean(returns_tsla), digits=3))%")</span>
+<span id="cb20-15"><a href=""></a>println("  Std: $(round(std(returns_tsla), digits=3))%")</span>
+<span id="cb20-16"><a href=""></a>println("  Assimetria: $(round(skewness(returns_tsla), digits=3))")</span>
+<span id="cb20-17"><a href=""></a>println("  Curtose: $(round(kurtosis(returns_tsla), digits=3))")</span>
+<span id="cb20-18"><a href=""></a></span>
+<span id="cb20-19"><a href=""></a>println("\nSPY:")</span>
+<span id="cb20-20"><a href=""></a>println("  Média: $(round(mean(returns_spy), digits=3))%")</span>
+<span id="cb20-21"><a href=""></a>println("  Std: $(round(std(returns_spy), digits=3))%")</span>
+<span id="cb20-22"><a href=""></a>println("  Assimetria: $(round(skewness(returns_spy), digits=3))")</span>
+<span id="cb20-23"><a href=""></a>println("  Curtose: $(round(kurtosis(returns_spy), digits=3))")</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comparação-julia-vs-python-vs-r" class="slide level2">
+<h2>📚 COMPARAÇÃO: Julia vs Python vs R</h2>
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource {julia} number-lines code-with-copy"><code class="sourceCode"><span id="cb21-1"><a href=""></a>#| echo: true</span>
+<span id="cb21-2"><a href=""></a>#| output: true</span>
+<span id="cb21-3"><a href=""></a></span>
+<span id="cb21-4"><a href=""></a>comparison = DataFrame(</span>
+<span id="cb21-5"><a href=""></a>    Critério = [</span>
+<span id="cb21-6"><a href=""></a>        "Performance (Velocidade)",</span>
+<span id="cb21-7"><a href=""></a>        "Facilidade - Básico",</span>
+<span id="cb21-8"><a href=""></a>        "Facilidade - Avançado",</span>
+<span id="cb21-9"><a href=""></a>        "Documentação",</span>
+<span id="cb21-10"><a href=""></a>        "Comunidade",</span>
+<span id="cb21-11"><a href=""></a>        "Integração Científica",</span>
+<span id="cb21-12"><a href=""></a>        "Interatividade",</span>
+<span id="cb21-13"><a href=""></a>        "Curva de Aprendizado",</span>
+<span id="cb21-14"><a href=""></a>        "Melhor para"</span>
+<span id="cb21-15"><a href=""></a>    ],</span>
+<span id="cb21-16"><a href=""></a>    Julia = [</span>
+<span id="cb21-17"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-18"><a href=""></a>        "⭐⭐⭐⭐ (4/5)",</span>
+<span id="cb21-19"><a href=""></a>        "⭐⭐⭐ (3/5)",</span>
+<span id="cb21-20"><a href=""></a>        "⭐⭐⭐ (3/5)",</span>
+<span id="cb21-21"><a href=""></a>        "⭐⭐⭐ (3/5)",</span>
+<span id="cb21-22"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-23"><a href=""></a>        "⭐⭐⭐⭐ (4/5)",</span>
+<span id="cb21-24"><a href=""></a>        "Média",</span>
+<span id="cb21-25"><a href=""></a>        "Computação intensiva, performance"</span>
+<span id="cb21-26"><a href=""></a>    ],</span>
+<span id="cb21-27"><a href=""></a>    Python = [</span>
+<span id="cb21-28"><a href=""></a>        "⭐⭐⭐ (3/5)",</span>
+<span id="cb21-29"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-30"><a href=""></a>        "⭐⭐⭐⭐ (4/5)",</span>
+<span id="cb21-31"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-32"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-33"><a href=""></a>        "⭐⭐⭐⭐ (4/5)",</span>
+<span id="cb21-34"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-35"><a href=""></a>        "Fácil",</span>
+<span id="cb21-36"><a href=""></a>        "Prototipagem rápida, ML/DL"</span>
+<span id="cb21-37"><a href=""></a>    ],</span>
+<span id="cb21-38"><a href=""></a>    R = [</span>
+<span id="cb21-39"><a href=""></a>        "⭐⭐ (2/5)",</span>
+<span id="cb21-40"><a href=""></a>        "⭐⭐⭐ (3/5)",</span>
+<span id="cb21-41"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-42"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-43"><a href=""></a>        "⭐⭐⭐⭐ (4/5)",</span>
+<span id="cb21-44"><a href=""></a>        "⭐⭐⭐⭐⭐ (5/5)",</span>
+<span id="cb21-45"><a href=""></a>        "⭐⭐⭐ (3/5)",</span>
+<span id="cb21-46"><a href=""></a>        "Média-Alta",</span>
+<span id="cb21-47"><a href=""></a>        "Estatística acadêmica, EDA"</span>
+<span id="cb21-48"><a href=""></a>    ]</span>
+<span id="cb21-49"><a href=""></a>)</span>
+<span id="cb21-50"><a href=""></a></span>
+<span id="cb21-51"><a href=""></a>println(comparison)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="checklist-final-boas-práticas" class="slide level2">
+<h2>✅ CHECKLIST FINAL: Boas Práticas</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>ANTES DE VISUALIZAR:</strong></p>
+<p>✅ Entender o objetivo<br>
+✅ Conhecer o público-alvo<br>
+✅ Identificar tipo de variáveis<br>
+✅ Limpar dados<br>
+✅ Calcular estatísticas</p>
+<p><strong>ESCOLHA DO GRÁFICO:</strong></p>
+<p>✅ 1 quant → Histogram/Density<br>
+✅ 1 cat → Bar<br>
+✅ 2 quant → Scatter<br>
+✅ 1q+1c → Boxplot<br>
+✅ Temporal → Line<br>
+✅ Correlação → Heatmap</p>
+</div><div class="column" style="width:50%;">
+<p><strong>DESIGN:</strong></p>
+<p>✅ Título descritivo<br>
+✅ Eixos com labels/unidades<br>
+✅ Cores com propósito<br>
+✅ Transparência adequada<br>
+✅ Tamanho legível (≥800px)<br>
+✅ Fonte ≥10pt<br>
+✅ Grid quando apropriado</p>
+<p><strong>ÉTICA:</strong></p>
+<p>✅ Eixos não manipulados<br>
+✅ Escalas honestas<br>
+✅ Citar fontes<br>
+✅ Transparência total</p>
+</div></div>
+</section>
+<section id="recursos-recomendados" class="slide level2">
+<h2>📖 RECURSOS RECOMENDADOS</h2>
+<p><strong>Documentação:</strong></p>
+<ul>
+<li><strong>Julia</strong>: <a href="https://docs.juliaplots.org/">Plots.jl</a>, <a href="https://github.com/JuliaPlots/StatsPlots.jl">StatsPlots.jl</a></li>
+<li><strong>Python</strong>: <a href="https://seaborn.pydata.org/">Seaborn</a>, <a href="https://matplotlib.org/">Matplotlib</a></li>
+<li><strong>R</strong>: <a href="https://ggplot2.tidyverse.org/">ggplot2</a>, <a href="https://www.tidyverse.org/">tidyverse</a></li>
+</ul>
+<p><strong>Livros:</strong></p>
+<ul>
+<li><em>Fundamentals of Data Visualization</em> - Claus Wilke</li>
+<li><em>Storytelling with Data</em> - Cole Nussbaumer Knaflic</li>
+<li><em>The Visual Display of Quantitative Information</em> - Edward Tufte</li>
+</ul>
+<p><strong>Datasets:</strong></p>
+<ul>
+<li><a href="https://www.kaggle.com/datasets">Kaggle</a> - Milhares de datasets reais</li>
+<li><a href="https://archive.ics.uci.edu/">UCI ML Repository</a> - Dados para ML</li>
+<li><a href="https://data.gov/">data.gov</a> - Dados governamentais abertos</li>
+</ul>
+</section>
+<section id="próximos-passos" class="slide level2">
+<h2>🎯 PRÓXIMOS PASSOS</h2>
+<div>
+<ol type="1">
+<li class="fragment"><strong>Praticar</strong> com datasets reais do Kaggle</li>
+<li class="fragment"><strong>Explorar</strong> visualizações interativas (Plotly, D3.js)</li>
+<li class="fragment"><strong>Aprender</strong> dashboards (Pluto.jl, Streamlit, Shiny)</li>
+<li class="fragment"><strong>Estudar</strong> visualização de redes e geoespacial</li>
+<li class="fragment"><strong>Aplicar</strong> em projetos reais</li>
+<li class="fragment"><strong>Compartilhar</strong> seus trabalhos!</li>
+</ol>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Dica Final</strong></p>
+</div>
+<div class="callout-content">
+<p>A melhor visualização é aquela que <strong>comunica claramente</strong> sua mensagem para o público-alvo. Simplicidade &gt; Complexidade.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="lição-de-casa-detetive-de-visualização" class="slide level2">
+<h2>Lição de Casa: 🕵 Detetive de Visualização</h2>
+<div>
+<p><strong>Missão:</strong> Encontre um gráfico real publicado online (notícia, artigo, rede social, relatório) que seja tecnicamente correto mas visualmente problemático. Analise, refaça aplicando boas práticas e justifique suas escolhas.</p>
+</div>
+</section>
+<section id="parte-1-encontrar-e-documentar" class="slide level2">
+<h2>Parte 1: Encontrar e Documentar</h2>
+<p><strong>Onde procurar:</strong> - Portais de notícias (G1, Folha, Estadão) - Relatórios corporativos públicos - Artigos científicos de acesso aberto - Redes sociais (Twitter/X, LinkedIn, Instagram) - Publicações governamentais</p>
+<p><strong>Documentação necessária:</strong> - Screenshot do gráfico original - Fonte completa (URL + data de acesso) - Contexto: onde foi publicado e para qual audiência</p>
+</section>
+<section id="parte-2-análise-crítica" class="slide level2">
+<h2>Parte 2: Análise Crítica</h2>
+<p><strong>Identifique pelo menos 6 problemas de visualização:</strong></p>
+<p>Categorias possíveis: - Título e labels (clareza, contexto, unidades) - Escolha de cores (contraste, acessibilidade, propósito) - Tipo de gráfico (adequação aos dados) - Escalas e eixos (manipulação, truncamento) - Tamanho e proporções (legibilidade) - Elementos desnecessários (chart junk, 3D, efeitos)</p>
+<p>Para cada problema, explique: 1. O que está errado 2. Por que isso prejudica a comunicação 3. Como deveria ser corrigido</p>
+</section>
+<section id="parte-3-reconstrução" class="slide level2">
+<h2>Parte 3: Reconstrução</h2>
+<p><strong>Refaça o gráfico aplicando boas práticas:</strong></p>
+<p>Requisitos mínimos: - Título descritivo com contexto completo - Eixos com labels e unidades claras - Cores apropriadas e acessíveis - Legenda clara (se aplicável) - Grid quando necessário - Tamanho adequado (mínimo 800x600px) - Fontes legíveis (mínimo 11pt) - Tipo de gráfico apropriado aos dados</p>
+<p><strong>Código exigido:</strong> - Forneça o código usado (Julia, Python ou R) - Dados: extraia aproximadamente ou use os originais se disponíveis - Comente as decisões de design no código</p>
+</section>
+<section id="parte-4-justificativa" class="slide level2">
+<h2>Parte 4: Justificativa</h2>
+<p>Responda em até 300 palavras:</p>
+<ol type="1">
+<li>Quais foram suas principais mudanças e por quê?</li>
+<li>Que história o gráfico corrigido conta que o original obscurecia?</li>
+<li>Como suas escolhas melhoram a comunicação para a audiência original?</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<p><strong>Bônus:</strong> Identifique se há tentativa de manipulação visual intencional (escalas truncadas, gráficos enganosos) e discuta as implicações éticas.</p>
+</section>
+<section id="entrega" class="slide level2">
+<h2>Entrega</h2>
+<p>Arquivo PDF contendo: 1. Gráfico original (screenshot + fonte) 2. Lista de problemas identificados 3. Gráfico reconstruído 4. Código comentado 5. Justificativa escrita</p>
+</section>
+<section id="obrigado" class="slide level2">
+<h2>## 🙏 OBRIGADO!</h2>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="visualizacao-dados2_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="visualizacao-dados2_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
